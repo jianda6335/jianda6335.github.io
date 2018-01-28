@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title><![CDATA['第一篇文章']]></title>
     <url>%2F2018%2F01%2F28%2F%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%2F</url>
-    <content type="text"><![CDATA[title: ‘’’第一篇文章’’’date: 2018-01-28 16:14:15tags: 随笔comment:test]]></content>
+    <content type="text"></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
   </entry>
 </search>

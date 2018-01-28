@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-28T09:00:51.173Z</updated>
+  <updated>2018-01-28T09:03:47.643Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,25 +17,18 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>&#39;第一篇文章&#39;</title>
     <link href="http://yoursite.com/2018/01/28/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
     <id>http://yoursite.com/2018/01/28/第一篇文章/</id>
-    <published>2018-01-28T08:14:15.706Z</published>
-    <updated>2018-01-28T09:00:51.173Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p>title: ‘’’第一篇文章’’’<br>date: 2018-01-28 16:14:15<br>tags: 随笔<br>comment:<br>test</p>]]></content>
+    <published>2018-01-28T08:14:15.000Z</published>
+    <updated>2018-01-28T09:03:47.643Z</updated>
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;p&gt;title: ‘’’第一篇文章’’’&lt;br&gt;date: 2018-01-28 16:14:15&lt;br&gt;tags: 随笔&lt;br&gt;comment:&lt;br&gt;test&lt;/p&gt;
-
-      
-    
     </summary>
     
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

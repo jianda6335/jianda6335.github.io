@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>minehotpepper</title>
+    <title>about | minehotpepper</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="description" content="O ever youthful, O ever weeping.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="minehotpepper">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="minehotpepper">
 <meta property="og:description" content="O ever youthful, O ever weeping.">
 <meta property="og:locale" content="themes/languages/zh-CN">
+<meta property="og:updated_time" content="2018-01-29T06:44:49.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="minehotpepper">
+<meta name="twitter:title" content="about">
 <meta name="twitter:description" content="O ever youthful, O ever weeping.">
     
 
@@ -125,71 +126,157 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <em class="page-title-link" data-url="home">Inici</em>
+    <em class="page-title-link" data-url="/about/index.html">about</em>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="page-" class="article article-single article-type-page" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/01/28/第一篇文章/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-01-28T08:14:15.000Z" itemprop="datePublished">2018-01-28</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2018/01/28/第一篇文章/">&#39;第一篇文章&#39;</a>
+        about
         </h1>
     
 
-        <p class="article-excerpt">
-            忍者本身发动忍术是依靠发动体内的查克拉发动，普通的查克拉是通过自己的身体能量和精神能量混合所得到的，而仙术查克拉就是在此基础上吸收自然能量（循环于世界的能量）并完美融合后形成的。但是，要维持三种力量的平衡，就各是三分之一才能发动。如果超过三分之一，就会被自然之力吞噬，如果不到三分之一，就不能变成仙人模式，所以一般比较适合查克拉量比较大的人修炼。进入仙人模式后，身体会仙人化，而根据所吸收自然能量性质
-        </p>
-    </div>
-</article>
-    
+            </header>
+        
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
         </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/about/index.html" data-id="cjczupm0p00018gwrycfgvim3" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+            阅读数量:<span id="/about/index.html" class="leancloud_visitors" data-flag-title="about"></span>次
+    </div>
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzYyMS8xMDE3Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+            <script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+            <script>
+                var APP_ID = 'DAKKc5XA9sh98kdH1umY3JeA-gzGzoHsz';
+                var APP_KEY = 'QawB6Mssxm8mYUOWBGSnyYcm';
+                AV.init({
+                    appId: APP_ID,
+                    appKey: APP_KEY
+                });
+                function showTime(Counter) {
+                    var query = new AV.Query("Counter");
+                    if($(".leancloud_visitors").length > 0){
+                        var url = $(".leancloud_visitors").attr('id').trim();
+                        // where field
+                        query.equalTo("words", url);
+                        // count
+                        query.count().then(function (number) {
+                            // There are number instances of MyClass where words equals url.
+                            $(document.getElementById(url)).text(number?  number : '--');
+                        }, function (error) {
+                            // error is an instance of AVError.
+                        });
+                    }
+                }
+                function addCount(Counter) {
+                    var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+                    var Counter = AV.Object.extend("Counter");
+                    var query = new Counter;
+                    query.save({
+                        words: url
+                    }).then(function (object) {
+                    })
+                }
+                $(function () {
+                    var Counter = AV.Object.extend("Counter");
+                    addCount(Counter);
+                    showTime(Counter);
+                });
+            </script>
+</article>
+
+    <section id="comments">
     
-
-
-    </div></section>
-
+    </section>
 
 
                         </div>

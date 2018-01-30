@@ -941,7 +941,7 @@
         ** ** So set timeout s.speed + 50
     <=> ** loadContent() will load slide content in to the particular slide
         ** ** It has recursion (rec) parameter. if rec === true loadContent() will call preload() function.
-        ** ** preload will execute only when the previous slide is fully loaded (images iframe)
+        ** ** preload will execute only when the previous slide is fully loaded (index iframe)
         ** ** avoid simultaneous image load
     <=> ** Preload() will check for s.preload value and call loadContent() again accoring to preload value
         ** loadContent()  <====> Preload();

@@ -6,17 +6,43 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-30T13:58:44.483Z</updated>
+  <updated>2018-01-31T05:08:50.790Z</updated>
   <id>http://yoursite.com/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>永远年轻，永远热泪盈眶</title>
+    <link href="http://yoursite.com/2018/01/31/%E8%87%B4%E8%87%AA%E5%B7%B1/"/>
+    <id>http://yoursite.com/2018/01/31/致自己/</id>
+    <published>2018-01-31T04:40:48.000Z</published>
+    <updated>2018-01-31T05:08:50.790Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><font size="3">&ensp;&ensp;”Japhy,” I said out loud, “I don’t know when we’ll meet again or what’ll happen in the future,but Desolation, Desolation, I owe so much to Desolation. Thank you for guiding me to the place I learned all. Now comes the sadness of coming back to cities and I’ve grown two months older and there’s all that humanity of bars and burlesque shows and gritty love, all upsidedown in the void God bless them, but Japhy you and me forever know, O ever youthful, O ever weeping.” --《The Dharm Bums》</font></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;font size=&quot;3&quot;&gt;&amp;ensp;&amp;ensp;”Japhy,” I said out loud, “I don’t know when we’ll meet again or what’ll happen in the future,but De
+      
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="干下这杯酒" scheme="http://yoursite.com/tags/%E5%B9%B2%E4%B8%8B%E8%BF%99%E6%9D%AF%E9%85%92/"/>
+    
+  </entry>
   
   <entry>
     <title>文章插入图片</title>
     <link href="http://yoursite.com/2018/01/29/%E6%96%87%E7%AB%A0%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/"/>
     <id>http://yoursite.com/2018/01/29/文章插入图片/</id>
     <published>2018-01-29T07:32:07.000Z</published>
-    <updated>2018-01-30T13:58:44.483Z</updated>
+    <updated>2018-01-31T04:37:16.953Z</updated>
     
     <content type="html"><![CDATA[<p>图床：完成图片的插入，这种网站就被成为图床。<br>当博文中有图片时，若是少量图片，可以直接把图片存放在source文件夹。<br>或者把主页配置文件_config.yml 里的post_asset_folder:这个选项设置为true，在你的hexo目录下执行这样一句话npm install hexo-asset-image –save，这是下载安装一个可以上传本地图片的插件，等待一小段时间后，再运行hexo n “xxxx”来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹，最后在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：</p><pre><code>![你想输入的替代文字](xxxx/图片名.jpg)</code></pre><p>最后检查一下，hexo g生成页面后，进入public\2018\01\29\index.html文件中查看相关字段，可以发现，html标签内的语句是:</p><pre><code>&lt;img src=&quot;2018/01/29/xxxx/图片名.jpg&quot;&gt;</code></pre><p>而不是&lt;img src=”xxxx/图片名.jpg&gt;。这很重要，关乎你的网页是否可以真正加载你想插入的图片。但这显然不合理的，因为图片会占据大量的存储的空间，加载的时候相对缓慢 ，这时考虑把博文里的图片上传到某一网站，然后获得外部链接。使用Markdown语法:</p><pre><code>![图片信息](外部链接)</code></pre>]]></content>
     
@@ -33,6 +59,8 @@
     
     
       <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="图床" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%BA%8A/"/>
     
   </entry>
   

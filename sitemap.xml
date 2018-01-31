@@ -2,51 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>http://yoursite.com/2018/01/31/%E8%87%B4%E8%87%AA%E5%B7%B1/</loc>
     
-    <lastmod>2018-01-31T04:12:36.916Z</lastmod>
+    <lastmod>2018-01-31T05:08:50.790Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/about/index.html</loc>
     
-    <lastmod>2018-01-31T04:07:48.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/mysql/index.html</loc>
-    
-    <lastmod>2018-01-30T15:17:13.640Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/something/index.html</loc>
-    
-    <lastmod>2018-01-30T15:16:57.846Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/python/index.html</loc>
-    
-    <lastmod>2018-01-30T15:16:32.791Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    
-    <lastmod>2018-01-30T15:15:00.363Z</lastmod>
+    <lastmod>2018-01-31T04:57:59.924Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2018/01/29/%E6%96%87%E7%AB%A0%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/</loc>
     
-    <lastmod>2018-01-30T13:58:44.483Z</lastmod>
+    <lastmod>2018-01-31T04:37:16.953Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2018-01-31T04:36:28.719Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2018-01-31T04:36:00.174Z</lastmod>
     
   </url>
   

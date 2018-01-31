@@ -6,10 +6,35 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-31T05:08:50.790Z</updated>
+  <updated>2018-01-31T07:11:23.049Z</updated>
   <id>http://yoursite.com/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于hexo的逼格配置</title>
+    <link href="http://yoursite.com/2018/01/31/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E9%80%BC%E6%A0%BC%E9%85%8D%E7%BD%AE/"/>
+    <id>http://yoursite.com/2018/01/31/关于hexo的逼格配置/</id>
+    <published>2018-01-31T06:54:49.000Z</published>
+    <updated>2018-01-31T07:11:23.049Z</updated>
+    
+    <content type="html"><![CDATA[<p>在基础的配置之后，就想让他更酷炫一点，喏，这个就能满足你<a href="https://segmentfault.com/a/1190000009544924" target="_blank" rel="noopener"><font color="#0099ff">next个性化配置</font></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在基础的配置之后，就想让他更酷炫一点，喏，这个就能满足你&lt;a href=&quot;https://segmentfault.com/a/1190000009544924&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;font color=&quot;#0099ff&quot;&gt;ne
+      
+    
+    </summary>
+    
+      <category term="hexo搭建博客" scheme="http://yoursite.com/categories/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>永远年轻，永远热泪盈眶</title>

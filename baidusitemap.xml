@@ -3,19 +3,24 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/01/31/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E9%80%BC%E6%A0%BC%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2018-01-31T07:11:23.049Z</lastmod>
+    <loc>http://yoursite.com/2018/02/02/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2018-02-05T14:40:51.794Z</lastmod>
     <data>
         <display>
-        <title>关于hexo的逼格配置</title>
-        <pubTime>2018-01-31T06:54:49.000Z</pubTime>
+        <title>开发环境搭建</title>
+        <pubTime>2018-02-02T13:24:13.000Z</pubTime>
         
-        <tag>hexo </tag>
+        <tag>Django </tag>
+         
+        <tag>后端开发 </tag>
          
          
            
              
-              <breadCrumb title="hexo搭建博客" url="http://yoursite.com/categories/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+              <breadCrumb title="Django" url="http://yoursite.com/categories/Django/"/>
+          
+             
+              <breadCrumb title="在线教育平台" url="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
           
         </display>
     </data>
@@ -24,7 +29,7 @@
     
   <url>
     <loc>http://yoursite.com/2018/01/31/%E8%87%B4%E8%87%AA%E5%B7%B1/</loc>
-    <lastmod>2018-01-31T05:08:50.790Z</lastmod>
+    <lastmod>2018-02-05T12:39:16.616Z</lastmod>
     <data>
         <display>
         <title>永远年轻，永远热泪盈眶</title>
@@ -36,6 +41,26 @@
            
              
               <breadCrumb title="随笔" url="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/31/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E9%80%BC%E6%A0%BC%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2018-02-03T10:38:44.878Z</lastmod>
+    <data>
+        <display>
+        <title>关于hexo的逼格配置</title>
+        <pubTime>2018-01-31T06:54:49.000Z</pubTime>
+        
+        <tag>hexo </tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo搭建博客" url="http://yoursite.com/categories/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
           
         </display>
     </data>

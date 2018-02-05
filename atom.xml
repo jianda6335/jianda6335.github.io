@@ -6,17 +6,57 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-31T07:11:23.049Z</updated>
+  <updated>2018-02-05T14:40:51.794Z</updated>
   <id>http://yoursite.com/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开发环境搭建</title>
+    <link href="http://yoursite.com/2018/02/02/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2018/02/02/开发环境搭建/</id>
+    <published>2018-02-02T13:24:13.000Z</published>
+    <updated>2018-02-05T14:40:51.794Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近学习完了bobby老师的Django打造在线教育平台，正准备学习他的Django打造生鲜电商。就想把这段时间的学习心得和重要的知识点记录一下，因为版权的原因，这里只是一些学习笔记，不会有视频资源和相关的源码。希望有兴趣的同学可以去<a href="https://www.imooc.com/search/?words=__bobby" target="_blank" rel="noopener"><font color="#0099ff">慕课网_bobby老师</font></a>的课程下学习。话不多说，开始吧！</p><!-- toc --><h3 id="搭建开发环境"><a href="#搭建开发环境" class="headerlink" title="搭建开发环境"></a>搭建开发环境</h3><p>我们需要安装的软件有pycharm、mysql、navicat。<br>pycharm一定要选<strong>专业版</strong><br>mysql安装选的是5.7.21解压免安装版，记得配置环境变量方便使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\mysql-5.7.21-winx64\mysql-5.7.21-winx64\bin</span><br></pre></td></tr></table></figure></p><p>这是我的安装路径，将他添加到环境变量path中就行，然后在你的cmder中键入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure></p><p>看你的数据库是否配置成功，若显示服务已启动则表示成功。<br>Navicat同理，都有破解版，在安装完mysql利用Navicat创建新的mysql连接的时候，可能会出现下面这种情况：</p><blockquote><p>1045-Access denied for user ‘root’@’localhost’（using password:YES）</p></blockquote><p>这个错误是输入密码错误的，怎么改呢？<br>按照如下步骤执行：<br>1.找到配置文件my.ini （我的电脑的路径：D:\mysql-5.7.21-winx64\mysql-5.7.21-winx64\bin） ，然后将其打开，可以选择用记事本打开.<br>2.打开后，Ctrl+F 搜索[mysqld]。<br>找到后，在[mysqld]下面添加skip-grant-tables，保存退出。<br>PS：若提示不让保存时，可以将该文件剪切到桌面，更改保存后再复制到mySQL目录下<br>3.保存后重启mySQL<br>4.然后运行cmd<br>然后就可以执行mysql命令了。<br>输入mysql -u root -p就可以不用密码登录了，出现password：的时候直接回车可以进入，到此步骤成功连接到mysql数据库了。<br>5.修改密码<br>依次执行如下命令：<br>(1)use mysql；<br>(2) UPDATE user SET Password=PASSWORD(‘newpassword’) where USER=’root’;  因为版本的不同，5.7以上的版本会显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 1054 (42S22): Unknown column &apos;Password&apos; in &apos;field list&apos;</span><br></pre></td></tr></table></figure></p><p>是因为mysql数据库下已经没有password这个字段了，password字段改成了authentication_string，所以只要这么写就可以啦！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update mysql.user set authentication_string=password(&apos;root&apos;) where user=&apos;root&apos;</span><br></pre></td></tr></table></figure></p><p>(3)flush privileges;<br>(4)quitBye;<br>6.改好之后，再修改一下my.ini这个文件，把我们刚才加入的”skip-grant-tables”这行删除，保存退出再重启mysql服务就可以了。<br>7.你以为错误就这样结束了？不存在的，在进行Navicat进行连接的时候会出现一个新的错误，那就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MySQL错误号码1862：your password has expired</span><br></pre></td></tr></table></figure></p><p>开心不？？？<br>解决起来也很简单，跟随我魔鬼的步伐！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#开启mysql服务</span><br><span class="line">net start mysql</span><br><span class="line">#登入你的mysql</span><br><span class="line">mysql -uroot -p</span><br><span class="line">#输入你的密码</span><br><span class="line">[*******]</span><br><span class="line">#再改一下密码</span><br><span class="line">SET PASSWORD = PASSWORD(&apos;root&apos;);</span><br></pre></td></tr></table></figure></p><p>大功告成！这下navicat就能连接到mysql啦！</p><p>然后记得<a href="http://blog.csdn.net/u011372080/article/details/77994615" target="_blank" rel="noopener"><font color="#0099ff">安装Python2.7和3.6的开发环境</font></a><br>最后记得安装Python的虚拟环境virtualenv。这里说一下virtualenv的优点：<br><strong>1.使不同应用开发环境独立</strong><br><strong>2.环境升级不影响其他应用，也不会影响全局的Python环境</strong><br><strong>3.可以防止系统中出现包混乱和版本的冲突</strong><br>但是virtualenv的管理不太方便就需要另一款开发库virtualenvwrapper-win。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenvwrapper-win</span><br><span class="line">mkvirtualenv yourenvname</span><br><span class="line">mkvirtualenv --python=your-python3.6-install-path\python.exe yourenvname</span><br></pre></td></tr></table></figure></p><p>如果你想改变你存放虚拟环境的文件夹，你可以在环境变量中新建一个系统变量叫做WORKON_HOME 然后将你希望的ENVS文件夹所在的路径加进去，然后重启一下你的CMD或者CMDER就行了。<br><a id="more"></a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近学习完了bobby老师的Django打造在线教育平台，正准备学习他的Django打造生鲜电商。就想把这段时间的学习心得和重要的知识点记录一下，因为版权的原因，这里只是一些学习笔记，不会有视频资源和相关的源码。希望有兴趣的同学可以去&lt;a href=&quot;https://www.imooc.com/search/?words=__bobby&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;font color=&quot;#0099ff&quot;&gt;慕课网_bobby老师&lt;/font&gt;&lt;/a&gt;的课程下学习。话不多说，开始吧！&lt;/p&gt;
+&lt;!-- toc --&gt;
+&lt;h3 id=&quot;搭建开发环境&quot;&gt;&lt;a href=&quot;#搭建开发环境&quot; class=&quot;headerlink&quot; title=&quot;搭建开发环境&quot;&gt;&lt;/a&gt;搭建开发环境&lt;/h3&gt;&lt;p&gt;我们需要安装的软件有pycharm、mysql、navicat。&lt;br&gt;pycharm一定要选&lt;strong&gt;专业版&lt;/strong&gt;&lt;br&gt;mysql安装选的是5.7.21解压免安装版，记得配置环境变量方便使用&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;D:\mysql-5.7.21-winx64\mysql-5.7.21-winx64\bin&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这是我的安装路径，将他添加到环境变量path中就行，然后在你的cmder中键入&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;net start mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;看你的数据库是否配置成功，若显示服务已启动则表示成功。&lt;br&gt;Navicat同理，都有破解版，在安装完mysql利用Navicat创建新的mysql连接的时候，可能会出现下面这种情况：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1045-Access denied for user ‘root’@’localhost’（using password:YES）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个错误是输入密码错误的，怎么改呢？&lt;br&gt;按照如下步骤执行：&lt;br&gt;1.找到配置文件my.ini （我的电脑的路径：D:\mysql-5.7.21-winx64\mysql-5.7.21-winx64\bin） ，然后将其打开，可以选择用记事本打开.&lt;br&gt;2.打开后，Ctrl+F 搜索[mysqld]。&lt;br&gt;找到后，在[mysqld]下面添加skip-grant-tables，保存退出。&lt;br&gt;PS：若提示不让保存时，可以将该文件剪切到桌面，更改保存后再复制到mySQL目录下&lt;br&gt;3.保存后重启mySQL&lt;br&gt;4.然后运行cmd&lt;br&gt;然后就可以执行mysql命令了。&lt;br&gt;输入mysql -u root -p就可以不用密码登录了，出现password：的时候直接回车可以进入，到此步骤成功连接到mysql数据库了。&lt;br&gt;5.修改密码&lt;br&gt;依次执行如下命令：&lt;br&gt;(1)use mysql；&lt;br&gt;(2) UPDATE user SET Password=PASSWORD(‘newpassword’) where USER=’root’;  因为版本的不同，5.7以上的版本会显示&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ERROR 1054 (42S22): Unknown column &amp;apos;Password&amp;apos; in &amp;apos;field list&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;是因为mysql数据库下已经没有password这个字段了，password字段改成了authentication_string，所以只要这么写就可以啦！&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;update mysql.user set authentication_string=password(&amp;apos;root&amp;apos;) where user=&amp;apos;root&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;(3)flush privileges;&lt;br&gt;(4)quitBye;&lt;br&gt;6.改好之后，再修改一下my.ini这个文件，把我们刚才加入的”skip-grant-tables”这行删除，保存退出再重启mysql服务就可以了。&lt;br&gt;7.你以为错误就这样结束了？不存在的，在进行Navicat进行连接的时候会出现一个新的错误，那就是&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;MySQL错误号码1862：your password has expired&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;开心不？？？&lt;br&gt;解决起来也很简单，跟随我魔鬼的步伐！&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#开启mysql服务&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;net start mysql&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#登入你的mysql&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mysql -uroot -p&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#输入你的密码&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[*******]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#再改一下密码&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SET PASSWORD = PASSWORD(&amp;apos;root&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;大功告成！这下navicat就能连接到mysql啦！&lt;/p&gt;
+&lt;p&gt;然后记得&lt;a href=&quot;http://blog.csdn.net/u011372080/article/details/77994615&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;font color=&quot;#0099ff&quot;&gt;安装Python2.7和3.6的开发环境&lt;/font&gt;&lt;/a&gt;&lt;br&gt;最后记得安装Python的虚拟环境virtualenv。这里说一下virtualenv的优点：&lt;br&gt;&lt;strong&gt;1.使不同应用开发环境独立&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;2.环境升级不影响其他应用，也不会影响全局的Python环境&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;3.可以防止系统中出现包混乱和版本的冲突&lt;/strong&gt;&lt;br&gt;但是virtualenv的管理不太方便就需要另一款开发库virtualenvwrapper-win。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;pip install virtualenvwrapper-win&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mkvirtualenv yourenvname&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mkvirtualenv --python=your-python3.6-install-path\python.exe yourenvname&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果你想改变你存放虚拟环境的文件夹，你可以在环境变量中新建一个系统变量叫做WORKON_HOME 然后将你希望的ENVS文件夹所在的路径加进去，然后重启一下你的CMD或者CMDER就行了。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Django" scheme="http://yoursite.com/categories/Django/"/>
+    
+      <category term="在线教育平台" scheme="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
+    
+    
+      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+    
+      <category term="后端开发" scheme="http://yoursite.com/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>关于hexo的逼格配置</title>
     <link href="http://yoursite.com/2018/01/31/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E9%80%BC%E6%A0%BC%E9%85%8D%E7%BD%AE/"/>
     <id>http://yoursite.com/2018/01/31/关于hexo的逼格配置/</id>
     <published>2018-01-31T06:54:49.000Z</published>
-    <updated>2018-01-31T07:11:23.049Z</updated>
+    <updated>2018-02-03T10:38:44.878Z</updated>
     
     <content type="html"><![CDATA[<p>在基础的配置之后，就想让他更酷炫一点，喏，这个就能满足你<a href="https://segmentfault.com/a/1190000009544924" target="_blank" rel="noopener"><font color="#0099ff">next个性化配置</font></a></p>]]></content>
     
@@ -41,16 +81,16 @@
     <link href="http://yoursite.com/2018/01/31/%E8%87%B4%E8%87%AA%E5%B7%B1/"/>
     <id>http://yoursite.com/2018/01/31/致自己/</id>
     <published>2018-01-31T04:40:48.000Z</published>
-    <updated>2018-01-31T05:08:50.790Z</updated>
+    <updated>2018-02-05T12:39:16.616Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><font size="3">&ensp;&ensp;”Japhy,” I said out loud, “I don’t know when we’ll meet again or what’ll happen in the future,but Desolation, Desolation, I owe so much to Desolation. Thank you for guiding me to the place I learned all. Now comes the sadness of coming back to cities and I’ve grown two months older and there’s all that humanity of bars and burlesque shows and gritty love, all upsidedown in the void God bless them, but Japhy you and me forever know, O ever youthful, O ever weeping.” --《The Dharm Bums》</font></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>&ensp;&ensp;”Japhy,” I said out loud, “I don’t know when we’ll meet again or what’ll happen in the future,but Desolation, Desolation, I owe so much to Desolation. Thank you for guiding me to the place I learned all. Now comes the sadness of coming back to cities and I’ve grown two months older and there’s all that humanity of bars and burlesque shows and gritty love, all upsidedown in the void God bless them, but Japhy you and me forever know, O ever youthful, O ever weeping.” --《The Dharm Bums》<font size="3"></font></p></blockquote>]]></content>
     
     <summary type="html">
     
       
       
         &lt;blockquote&gt;
-&lt;font size=&quot;3&quot;&gt;&amp;ensp;&amp;ensp;”Japhy,” I said out loud, “I don’t know when we’ll meet again or what’ll happen in the future,but De
+&lt;p&gt;&amp;ensp;&amp;ensp;”Japhy,” I said out loud, “I don’t know when we’ll meet again or what’ll happen in the future,but Desolation, De
       
     
     </summary>

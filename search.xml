@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[开发环境搭建]]></title>
+    <url>%2F2018%2F02%2F02%2F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[最近学习完了bobby老师的Django打造在线教育平台，正准备学习他的Django打造生鲜电商。就想把这段时间的学习心得和重要的知识点记录一下，因为版权的原因，这里只是一些学习笔记，不会有视频资源和相关的源码。希望有兴趣的同学可以去慕课网_bobby老师的课程下学习。话不多说，开始吧！ 搭建开发环境我们需要安装的软件有pycharm、mysql、navicat。pycharm一定要选专业版mysql安装选的是5.7.21解压免安装版，记得配置环境变量方便使用1D:\mysql-5.7.21-winx64\mysql-5.7.21-winx64\bin 这是我的安装路径，将他添加到环境变量path中就行，然后在你的cmder中键入1net start mysql 看你的数据库是否配置成功，若显示服务已启动则表示成功。Navicat同理，都有破解版，在安装完mysql利用Navicat创建新的mysql连接的时候，可能会出现下面这种情况： 1045-Access denied for user ‘root’@’localhost’（using password:YES） 这个错误是输入密码错误的，怎么改呢？按照如下步骤执行：1.找到配置文件my.ini （我的电脑的路径：D:\mysql-5.7.21-winx64\mysql-5.7.21-winx64\bin） ，然后将其打开，可以选择用记事本打开.2.打开后，Ctrl+F 搜索[mysqld]。找到后，在[mysqld]下面添加skip-grant-tables，保存退出。PS：若提示不让保存时，可以将该文件剪切到桌面，更改保存后再复制到mySQL目录下3.保存后重启mySQL4.然后运行cmd然后就可以执行mysql命令了。输入mysql -u root -p就可以不用密码登录了，出现password：的时候直接回车可以进入，到此步骤成功连接到mysql数据库了。5.修改密码依次执行如下命令：(1)use mysql；(2) UPDATE user SET Password=PASSWORD(‘newpassword’) where USER=’root’; 因为版本的不同，5.7以上的版本会显示1ERROR 1054 (42S22): Unknown column &apos;Password&apos; in &apos;field list&apos; 是因为mysql数据库下已经没有password这个字段了，password字段改成了authentication_string，所以只要这么写就可以啦！1update mysql.user set authentication_string=password(&apos;root&apos;) where user=&apos;root&apos; (3)flush privileges;(4)quitBye;6.改好之后，再修改一下my.ini这个文件，把我们刚才加入的”skip-grant-tables”这行删除，保存退出再重启mysql服务就可以了。7.你以为错误就这样结束了？不存在的，在进行Navicat进行连接的时候会出现一个新的错误，那就是1MySQL错误号码1862：your password has expired 开心不？？？解决起来也很简单，跟随我魔鬼的步伐！12345678#开启mysql服务net start mysql#登入你的mysqlmysql -uroot -p#输入你的密码[*******]#再改一下密码SET PASSWORD = PASSWORD(&apos;root&apos;); 大功告成！这下navicat就能连接到mysql啦！ 然后记得安装Python2.7和3.6的开发环境最后记得安装Python的虚拟环境virtualenv。这里说一下virtualenv的优点：1.使不同应用开发环境独立2.环境升级不影响其他应用，也不会影响全局的Python环境3.可以防止系统中出现包混乱和版本的冲突但是virtualenv的管理不太方便就需要另一款开发库virtualenvwrapper-win。123pip install virtualenvwrapper-winmkvirtualenv yourenvnamemkvirtualenv --python=your-python3.6-install-path\python.exe yourenvname 如果你想改变你存放虚拟环境的文件夹，你可以在环境变量中新建一个系统变量叫做WORKON_HOME 然后将你希望的ENVS文件夹所在的路径加进去，然后重启一下你的CMD或者CMDER就行了。]]></content>
+      <categories>
+        <category>Django</category>
+        <category>在线教育平台</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
+        <tag>后端开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[关于hexo的逼格配置]]></title>
     <url>%2F2018%2F01%2F31%2F%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E9%80%BC%E6%A0%BC%E9%85%8D%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[在基础的配置之后，就想让他更酷炫一点，喏，这个就能满足你next个性化配置]]></content>

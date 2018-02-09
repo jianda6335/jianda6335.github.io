@@ -1,147 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+  
+  <url>
+    <loc>http://yoursite.com/2018/02/07/MODEl%E4%B9%8Bmeta%E9%80%89%E9%A1%B9/</loc>
     
+    <lastmod>2018-02-09T10:34:48.381Z</lastmod>
+    
+  </url>
+  
   <url>
     <loc>http://yoursite.com/2018/02/06/django-orm-%E5%92%8C-model%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2018-02-07T11:06:54.568Z</lastmod>
-    <data>
-        <display>
-        <title>django orm 和 model设计</title>
-        <pubTime>2018-02-06T06:25:47.000Z</pubTime>
-        
-        <tag>Django </tag>
-         
-        <tag>后端开发 </tag>
-         
-         
-           
-             
-              <breadCrumb title="Django" url="http://yoursite.com/categories/Django/"/>
-          
-             
-              <breadCrumb title="在线教育平台" url="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
+    <lastmod>2018-02-07T11:06:54.568Z</lastmod>
+    
+  </url>
+  
   <url>
     <loc>http://yoursite.com/2018/02/05/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B/</loc>
-    <lastmod>2018-02-06T06:20:18.714Z</lastmod>
-    <data>
-        <display>
-        <title>项目配置流程</title>
-        <pubTime>2018-02-05T14:49:10.000Z</pubTime>
-        
-        <tag>Django </tag>
-         
-        <tag>后端开发 </tag>
-         
-         
-           
-             
-              <breadCrumb title="Django" url="http://yoursite.com/categories/Django/"/>
-          
-             
-              <breadCrumb title="在线教育平台" url="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
-          
-             
-              <breadCrumb title="Djando 基础知识" url="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/Djando-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
+    <lastmod>2018-02-06T06:20:18.714Z</lastmod>
+    
+  </url>
+  
   <url>
     <loc>http://yoursite.com/2018/02/02/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2018-02-05T15:07:35.110Z</lastmod>
-    <data>
-        <display>
-        <title>开发环境搭建</title>
-        <pubTime>2018-02-02T13:24:13.000Z</pubTime>
-        
-        <tag>Django </tag>
-         
-        <tag>后端开发 </tag>
-         
-         
-           
-             
-              <breadCrumb title="Django" url="http://yoursite.com/categories/Django/"/>
-          
-             
-              <breadCrumb title="在线教育平台" url="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
+    <lastmod>2018-02-05T15:07:35.110Z</lastmod>
+    
+  </url>
+  
   <url>
     <loc>http://yoursite.com/2018/01/31/%E8%87%B4%E8%87%AA%E5%B7%B1/</loc>
-    <lastmod>2018-02-05T12:39:16.616Z</lastmod>
-    <data>
-        <display>
-        <title>永远年轻，永远热泪盈眶</title>
-        <pubTime>2018-01-31T04:40:48.000Z</pubTime>
-        
-        <tag>干下这杯酒 </tag>
-         
-         
-           
-             
-              <breadCrumb title="随笔" url="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
+    <lastmod>2018-02-05T12:39:16.616Z</lastmod>
+    
+  </url>
+  
   <url>
     <loc>http://yoursite.com/2018/01/31/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E9%80%BC%E6%A0%BC%E9%85%8D%E7%BD%AE/</loc>
+    
     <lastmod>2018-02-03T10:38:44.878Z</lastmod>
-    <data>
-        <display>
-        <title>关于hexo的逼格配置</title>
-        <pubTime>2018-01-31T06:54:49.000Z</pubTime>
-        
-        <tag>hexo </tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo搭建博客" url="http://yoursite.com/categories/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/about/index.html</loc>
     
+    <lastmod>2018-01-31T04:57:59.924Z</lastmod>
+    
+  </url>
+  
   <url>
     <loc>http://yoursite.com/2018/01/29/%E6%96%87%E7%AB%A0%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/</loc>
+    
     <lastmod>2018-01-31T04:37:16.953Z</lastmod>
-    <data>
-        <display>
-        <title>文章插入图片</title>
-        <pubTime>2018-01-29T07:32:07.000Z</pubTime>
-        
-        <tag>hexo </tag>
-         
-        <tag>图床 </tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo搭建博客" url="http://yoursite.com/categories/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
+    <lastmod>2018-01-31T04:36:28.719Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2018-01-31T04:36:00.174Z</lastmod>
+    
+  </url>
+  
 </urlset>

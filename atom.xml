@@ -6,10 +6,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-02-10T08:20:19.159Z</updated>
+  <updated>2018-02-10T09:19:15.057Z</updated>
   <id>http://yoursite.com/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>url和templates配置</title>
+    <link href="http://yoursite.com/2018/02/10/url%E5%92%8Ctemplates%E9%85%8D%E7%BD%AE/"/>
+    <id>http://yoursite.com/2018/02/10/url和templates配置/</id>
+    <published>2018-02-10T08:34:33.000Z</published>
+    <updated>2018-02-10T09:19:15.057Z</updated>
+    
+    <content type="html"><![CDATA[<!-- toc --><h4 id="将数据库中的值显示到html中"><a href="#将数据库中的值显示到html中" class="headerlink" title="将数据库中的值显示到html中"></a>将数据库中的值显示到html中</h4><p>在views.py 中的render中是可以带参数的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from .models import UserMessage</span><br><span class="line">def getfrom(request):</span><br><span class="line">    message = UserMessage.objects.filter(name=&quot;yourname&quot;)</span><br><span class="line">    return render(request, &quot;message_form.html&quot;,&#123;&quot;my_message&quot;:message&#125;)</span><br></pre></td></tr></table></figure></p><p>在HTML的template模板中不能写入过多的Python逻辑便于后期的维护 添加<code>value</code>即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;</span><br><span class="line">    &lt;span&gt;联系地址 :&lt;/span&gt;</span><br><span class="line">    &lt;input id=&quot;adress&quot; type=&quot;text&quot; value=&quot;&#123;&#123; my_message.address &#125;&#125;&quot; etc./&gt;</span><br><span class="line">    &lt;div class=&quot;error-msg&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/label&gt;</span><br></pre></td></tr></table></figure></p><p>更多的template内置函数在<a href="https://docs.djangoproject.com/en/2.0/ref/forms/fields/" target="_blank" rel="noopener"><font color="#0099ff">传送门</font></a><br><a id="more"></a></p><!-- toc --><h4 id="url配置"><a href="#url配置" class="headerlink" title="url配置"></a>url配置</h4><p>第一点要注意的就是：在urls.py 中在后面添加一个<code>name</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(r&apos;^admin/&apos;, admin.site.urls),</span><br><span class="line">    url(r&apos;^form/$&apos;, getform, name=&apos;go_form&apos;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p><p>这样做的好处是，便于在template中用到内置的函数，简化操作。<br>原先在HTML中配置URL是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;/form/&quot; method=...&gt;</span><br></pre></td></tr></table></figure></p><p>有了<code>name</code>之后，就可以这么操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;&#123;% url &apos;go_form&apos;&apos;%&#125;&quot; method=...&gt;</span><br></pre></td></tr></table></figure></p><p>这么做的好处就是，如果以后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(r&apos;^form/$&apos;, getform, name=&apos;go_form&apos;)</span><br></pre></td></tr></table></figure></p><p>中的<code>form</code>改为别的，我就不至于再到HTML页面中改我的URL路径，因为我用到的是它的别名。<br>第二点要注意的是：在配置URL的时候一定要加上<code>/</code>和<code>$</code>符号，防止URL冲突。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(r&apos;^form/$&apos;, getform, name=&apos;go_form&apos;)</span><br></pre></td></tr></table></figure></p><!-- more -->]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- toc --&gt;
+&lt;h4 id=&quot;将数据库中的值显示到html中&quot;&gt;&lt;a href=&quot;#将数据库中的值显示到html中&quot; class=&quot;headerlink&quot; title=&quot;将数据库中的值显示到html中&quot;&gt;&lt;/a&gt;将数据库中的值显示到html中&lt;/h4&gt;&lt;p&gt;在views.py 中的render中是可以带参数的&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;from .models import UserMessage&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;def getfrom(request):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    message = UserMessage.objects.filter(name=&amp;quot;yourname&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return render(request, &amp;quot;message_form.html&amp;quot;,&amp;#123;&amp;quot;my_message&amp;quot;:message&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在HTML的template模板中不能写入过多的Python逻辑便于后期的维护 添加&lt;code&gt;value&lt;/code&gt;即可&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;label&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;span&amp;gt;联系地址 :&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;input id=&amp;quot;adress&amp;quot; type=&amp;quot;text&amp;quot; value=&amp;quot;&amp;#123;&amp;#123; my_message.address &amp;#125;&amp;#125;&amp;quot; etc./&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;div class=&amp;quot;error-msg&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;更多的template内置函数在&lt;a href=&quot;https://docs.djangoproject.com/en/2.0/ref/forms/fields/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;font color=&quot;#0099ff&quot;&gt;传送门&lt;/font&gt;&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Django" scheme="http://yoursite.com/categories/Django/"/>
+    
+      <category term="在线教育平台" scheme="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
+    
+    
+      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+    
+      <category term="后端开发" scheme="http://yoursite.com/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>models的增删改查</title>

@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Xadmin后台管理系统]]></title>
+    <url>%2F2018%2F02%2F24%2FXadmin%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%2F</url>
+    <content type="text"><![CDATA[Django 后台管理系统的特点 权限管理 少前端样式：因为首要解决的问题就是快速搭建 快速开发 将UserProfile注册到admin中在admin中的组就是数据库中的表 Django的admin后台管理系统在新建项目的时候就已经自动生成好的，Django的admin也是一个app，会在URL的配置中添加一个admin的链接。 通过createsuperuser 来让我们创建超级用户。Django默认是通过用户名和邮箱进行登录的，可以通过修改来通过邮箱登录。 修改settings.py中的三个参数123456#改为中文LANGUAGE_CODE = &apos;zh-hans&apos;(在Django1.8之后)#修改时区TIME_ZONE = &apos;Asia/Shanghai&apos;#将数据库存储时间改为本地时间USE_TZ = False 在user的admin.py中12345678from .models import UserProfile#UserProfileAdmin通用写法class UserProfileAdmin(admin.ModelAdmin): pass#将UserProfile和UserProfileAdmin关联起来admin.site.register(UserProfile, UserProfileAdmin) 可以看到用户信息的组，上面是model所在的app的名称吗，之后就可以进行表的增删改查。 如果在添加组信息的时候需要修改model，只需要将model修改好，然后makemigrations users(app的名称)就行了。可能会出现一个ValueError：too many values to unpack 原因可能是将所有的app都放在了同一个文件夹中，并且将这个文件夹的名称放进了全局搜索路径。只要将migrations下的文件的路径中去掉文件夹的名称就行了。 安装Xadmin两种安装方式：1、第一种安装方法是直接通过pip安装 在虚拟环境中通过 pip install xadmin 还会帮我们安装完其他的依赖包。然后在settings.py的INSTALLED_APPS中添加’xadmin’，除此之外还需要添加’crispy-forms’，之后将指向admin的URL指向xadmin1234567#urls.pyimport xadminurlpatterns = [ url(&apos;^xadmin/&apos;, xadmin.site.urls),] 最后记得注释掉之前默认的admin的注册方式。 登录到xadmin中出现了 xadmin_usersettings 不存在的错误，原因是因为xadmin有一些默认的表。需要在安装完xadmin后同步过来。直接makemigrations 之后 migrate即可。 2、第二种是通过源码的方式安装的。在GitHub上搜索xadmin下载解压后将文件中的xadmin文件夹添加到项目的根目录之下,因为xadmin也是app，将他放在extra_apps文件夹中。记得要将extra_apps文件夹加入到跟搜索路径中。123456#settings.pyimport osimport sysBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))sys.path.insert(0, os.path.join(BASE_DIR, &apos;extra_apps&apos;)) 将剩余的model注册到xadmin中Django的admin帮我们生成了admin.py文件，我们需要自己创建一个adminx.py文件12345import xadminfrom .models import YourModelNameclass YourModelNameAdmin(object): passxadmin.site.register(YourModelName, YourModelNameAdmin) 如果你想在后台中的表中显示表中的元素就在YourModelNameAdmin中加入1list_display = [&apos;元素1&apos;, &apos;元素2&apos;, &apos;元素3&apos;] 如果你想添加搜索表中元素的功能就在YourModelNameAdmin中加入1search_fields = [&apos;元素1&apos;, &apos;元素2&apos;, &apos;元素3&apos;] 如果你想加入过滤器的功能就在YourModelNameAdmin中加入1list_filter = [&apos;元素1&apos;, &apos;元素2&apos;, &apos;元素3&apos;] 效果图如下： Xadmin的全局配置1、主题功能12345678910#adminx.pyimport xadminfrom xadmin import viewsclass BaseSetting(object): enable_themes = True #默认是关闭的，打开这个功能 use_bootswatch = True #需要与view绑定起来#注册绑定xadmin.site.register(views.BaseAdminView, BaseSetting) 2、修改图中划线两处地方和将左边导航栏中的数据表收起123456789#adminx.pyimport xadminfrom xadmin import viewsclass GlobalSettings(object): site_title = &apos;在线教育后台管理系统&apos; #左上角的划线的字符 site_footer = &apos;在线教育网&apos; #下面划线地方的更改 menu_style = &apos;accordion&apos; #收起左边导航栏的数据表#注册绑定xadmin.site.register(views.CommAdminView, GlobalSettings) 3、自定义app名称1234567#第一步在每个app文件夹下的apps.pyclass YourAppNameConfig(AppConfig): name = &apos;YourAppName&apos; verbose_name = &apos;你的app名称&apos; #加verbose_name即可#第二步在__init__.pydefault_app_config = &apos;YourAppName.apps.YourAppNameConfig&apos;]]></content>
+      <categories>
+        <category>Django</category>
+        <category>在线教育平台</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
+        <tag>后端开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据类型和操作数据表]]></title>
+    <url>%2F2018%2F02%2F12%2F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[数据类型浮点型： FLOAT[(M,D)] DOUBLE[(M,D)] M是数字总位数 D是小数点后面的位数。日期类型： 1234567891011类型 大小(字节) 范围 格式 用途 DATE 4 1000-01-01/9999-12-31 YYYY-MM-DD 日期值 TIME 3 &apos;-838:59:59&apos;/&apos;838:59:59&apos; HH:MM:SS 时间值或持续时间 YEAR 1 1901/2155 YYYY 年份值 DATETIME 8 1000-01-01 00:00:00/9999-12-31 23:59:59 YYYY-MM-DD HH:MM:SS 混合日期和时间值 TIMESTAMP 4 1970-01-01 00:00:00/2037 年某时 YYYYMMDD HHMMSS 混合日期和时间值，时间戳 字符类型： 操作数据表数据表（或表）：是数据库最重要的组成部分之一，是其他对象的基础。1234567891011121314151617181920212223242526272829USE 数据库名称;#创建数据表CREATE TABLE [IF NOT EXISTS] table_name ( column_name data_type, ...);#查看数据表SHOW TABLES [FROM db_name] [LIKE &apos;pattern&apos; | WHERE expr];#查看数据表结构SHOW COLUMNS FROM tbl_name;#记录的插入和查找 如果不写列的名字就需要给所有的数据赋值INSERT [INTO] tbl_name [(col_name,...)] VALUES(val,...);SELECT expr,... FROM tbl_name;#空值与非空NULL 字段值可以为空NOT NULL 字段值禁止为空#自动编号AUTO_INCREMENT必须与主键配合使用，默认情况下起始值为1，每次的增量为1#主键每张数据表只能存在一个主键主键保持记录的唯一性主键自动为NOT NULL主键不一定要和AUTO_INCREMENT配合使用主键允许赋值，但是不能相同#唯一约束唯一约束可以保证记录的唯一性唯一约束的字段可以为空值每张数据表可以存在多个唯一约束]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MySQL初涉]]></title>
     <url>%2F2018%2F02%2F11%2FMySQL%E5%88%9D%E6%B6%89%2F</url>
     <content type="text"><![CDATA[启动和停止MySQL1234#启动MySQLnet start mysql#停止MySQLnet stop mysql 登录和退出mysql的参数1234567891011121314-D, --database=name 打开指定数据库--delimiter = name 指定分隔符-h, --host=name 服务器名称-p, --password[=name] 密码-P, --port=# 端口号--prompt=name 设置提示符-u, --user=name 用户名-V, --version 输出版本信息并且退出#登录mysql -u username -p#退出mysql &gt; exit;mysql &gt; quit;mysql &gt; \q; 修改MySQL提示符1、连接客户端时通过参数指定shell&gt;mysql -uroot -proot –prompt 提示符 2、连接上客户端后，通过prompt命令修改mysql&gt;prompt 提示符 12345#MySQL提示符\D 完整的日期\d 当前的数据库\h 服务器名称\u 当前用户 MySQL常用命令123456#显示当前服务器版本SELECT VERSION();#显示当前日期时间SELECT NOW();#显示当前用户SELECT USER(); MySQL语句的规范 关键字和函数名称全部大写 数据库名称、表名称、字段名称全部小写 SQL语句必须以分号结尾 数据库操作12345678910111213#创建数据库#&#123;&#125;表示必选项 里面的两个选项是完全相同的，两个任选其一就行# IF NOT EXISTS 如果创建的数据库已经产生，那么会忽略掉错误的，只会报一条警告信息 SHOW WARNINGS;查询警告信息#[]表示可选项#[DEFAULT] CHARACTER SET [=] charset_name 表示数据库默认的编码方式 SHOW CREATE DATABASE 数据库名称;查看创建数据库的语句。CREATE &#123;DATEBASE | SCHEMA&#125; [IF NOT EXISTS] db_name [DEFAULT] CHARACTER SET [=] charset_name#查看当前服务器下的数据表列表SHOW &#123;DATABASES | SCHEMA&#125; [LIKE &apos;pattern&apos; | WHERE expr]#修改数据库ALTER &#123;DATEBASE | SCHEMA&#125; db_name [DEFAULT] CHARACTER SET [=] charset_name#删除数据库DROP &#123;DATEBASE | SCHEMA&#125; [IF EXISTS] db_name]]></content>

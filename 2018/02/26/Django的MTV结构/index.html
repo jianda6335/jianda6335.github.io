@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, minehotpepper, python" />
+  <meta name="keywords" content="Django,后端开发," />
 
 
 
@@ -107,17 +107,18 @@
 
 
 
-<meta name="description" content="Python新手，准备从事web开发，对NLP感兴趣。喜欢独处，喜欢山川河流，喜欢听老歌，喜欢读喜欢的书！ Technical List&amp;ensp;&amp;ensp;语言：C++、Python&amp;ensp;&amp;ensp;数据库：MySQL、Redis、ES&amp;ensp;&amp;ensp;web框架：Django&amp;ensp;&amp;ensp;爬虫框架：Scrapy&amp;ensp;&amp;ensp;网络：TCP/IP、HTTP&amp;ens">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="MTV结构就是指Django的model、template、view  model是定义数据的存储格式，并且提供了数据库访问的API。 template是定义了数据如何被显示 view是定义哪儿些数据被显示，是业务逻辑的处理模块在Django项目中包含配置、和每个app被设计用于不同的功能。在设计app时要保证每个app的独立性。  在收到http请求的时候，依次完成下列处理：  根据URL通过U">
+<meta name="keywords" content="Django,后端开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django的MTV结构">
+<meta property="og:url" content="http://yoursite.com/2018/02/26/Django的MTV结构/index.html">
 <meta property="og:site_name" content="Minehotpepper&#39; Blog">
-<meta property="og:description" content="Python新手，准备从事web开发，对NLP感兴趣。喜欢独处，喜欢山川河流，喜欢听老歌，喜欢读喜欢的书！ Technical List&amp;ensp;&amp;ensp;语言：C++、Python&amp;ensp;&amp;ensp;数据库：MySQL、Redis、ES&amp;ensp;&amp;ensp;web框架：Django&amp;ensp;&amp;ensp;爬虫框架：Scrapy&amp;ensp;&amp;ensp;网络：TCP/IP、HTTP&amp;ens">
+<meta property="og:description" content="MTV结构就是指Django的model、template、view  model是定义数据的存储格式，并且提供了数据库访问的API。 template是定义了数据如何被显示 view是定义哪儿些数据被显示，是业务逻辑的处理模块在Django项目中包含配置、和每个app被设计用于不同的功能。在设计app时要保证每个app的独立性。  在收到http请求的时候，依次完成下列处理：  根据URL通过U">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-31T04:57:59.924Z">
+<meta property="og:updated_time" content="2018-02-26T10:30:51.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="Python新手，准备从事web开发，对NLP感兴趣。喜欢独处，喜欢山川河流，喜欢听老歌，喜欢读喜欢的书！ Technical List&amp;ensp;&amp;ensp;语言：C++、Python&amp;ensp;&amp;ensp;数据库：MySQL、Redis、ES&amp;ensp;&amp;ensp;web框架：Django&amp;ensp;&amp;ensp;爬虫框架：Scrapy&amp;ensp;&amp;ensp;网络：TCP/IP、HTTP&amp;ens">
+<meta name="twitter:title" content="Django的MTV结构">
+<meta name="twitter:description" content="MTV结构就是指Django的model、template、view  model是定义数据的存储格式，并且提供了数据库访问的API。 template是定义了数据如何被显示 view是定义哪儿些数据被显示，是业务逻辑的处理模块在Django项目中包含配置、和每个app被设计用于不同的功能。在设计app时要保证每个app的独立性。  在收到http请求的时候，依次完成下列处理：  根据URL通过U">
 
 
 
@@ -147,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/26/Django的MTV结构/"/>
 
 
 
 
 
-  <title>about | Minehotpepper' Blog</title>
+  <title>Django的MTV结构 | Minehotpepper' Blog</title>
   
 
 
@@ -322,35 +323,311 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/Django的MTV结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Minehotpepper' Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>Python新手，准备从事web开发，对NLP感兴趣。喜欢独处，喜欢山川河流，喜欢听老歌，喜欢读喜欢的书！</p>
-<p><font size="6"><strong>Technical List</strong></font><br>&ensp;&ensp;语言：C++、Python<br>&ensp;&ensp;数据库：MySQL、Redis、ES<br>&ensp;&ensp;web框架：Django<br>&ensp;&ensp;爬虫框架：Scrapy<br>&ensp;&ensp;网络：TCP/IP、HTTP<br>&ensp;&ensp;了解：前端<br><br><br>&ensp;&ensp;<em>永远年轻，永远的热泪盈眶！</em></p>
-
+          <h1 class="post-title" itemprop="name headline">Django的MTV结构</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T13:16:10+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,040
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>MTV结构就是指Django的model、template、view</p>
+<ul>
+<li>model是定义数据的存储格式，并且提供了数据库访问的API。</li>
+<li>template是定义了数据如何被显示</li>
+<li>view是定义哪儿些数据被显示，是业务逻辑的处理模块<br>在Django项目中包含配置、和每个app被设计用于不同的功能。在设计app时要保证每个app的独立性。</li>
+</ul>
+<p>在收到http请求的时候，依次完成下列处理：</p>
+<ul>
+<li>根据URL通过URLConf模块映射到View函数，将HttpRequest对象作为参数传入。</li>
+<li>在View函数中，获取HTTP请求的参数，通过Model访问数据库，进行业务逻辑运算得到输出数据。</li>
+<li>然后，加载Template，根据输出数据生成页面，将HttpResponse对象返回。</li>
+</ul>
+<!-- toc -->
+<h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><p>一个类对应于数据库中的表（Table），类属性对应于表的字段（Field）。<br>从 django.db.models.Model 派生，支持继承。<br>要使用一个APP时，需要将该APP的Model添加到工程的 settings.py INSTALLED_APPS 中。</p>
+<p>Field的定义:</p>
+<ul>
+<li>字段的类型：指定数据库表字段的类型，表单默认的Widget，以及校验条件。</li>
+<li>字段选项：null, blank, choices, default, unique, primary_key。</li>
+<li>表之间的关系：one-to-one, many-to-many, many-to-one。</li>
+</ul>
+<p>Model中可以定义Method，实现下列功能：</p>
+<ul>
+<li>添加定制的 “row-level” 功能； <a href="https://www.cnblogs.com/ljhdo/p/5040234.html" target="_blank" rel="noopener">行级安全</a></li>
+<li>override predefined methods；</li>
+<li>定义Model的Business Logic；</li>
+<li>定义Raw SQL; <a href="http://onlinehelp.tableau.com/current/pro/desktop/zh-cn/functions_functions_passthrough.html" target="_blank" rel="noopener">直通函数</a></li>
+</ul>
+<p>数据库表查询<br>使用QuerySet对象实现多种方式的查询，Model的objects属性返回QuerySet对象。<br>1、基本查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">all_entries = Entry.objects.all()</span><br><span class="line">part_entries = Entry.objects.all()[:5]</span><br><span class="line">one_entry = Entry.objects.get(pk=1)</span><br></pre></td></tr></table></figure>
+<p>2、使用过滤器查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Entry.objects.filter(pub_date__year=2006)</span><br><span class="line">Entry.objects.exclude(pub_date__gte=datetime.now())</span><br></pre></td></tr></table></figure>
+<p>3、字段（Field）查询<br>该功能等价于SQL中的WHERE，可以对Field指定更细致的查询条件。<br>通过Keyword参数，传递给QuerySet对象的get, filter, exclude方法。格式：field__lookuptype=value 。<br>常用的lookuptype有：</p>
+<ul>
+<li>exact<br>例如：Entry.objects.get(headline__exact=”Man bites dog”)</li>
+<li>iexact</li>
+<li>contains<br>例如：Entry.objects.get(headline__contains=’Lennon’)</li>
+<li>startswith, endswith</li>
+</ul>
+<p>QuerySet的特点：</p>
+<ul>
+<li>多个过滤器可以组成链使用；</li>
+<li>每次查询返回的QuerySet对象是独立保存；</li>
+<li>使用了缓存机制；</li>
+<li>使用了延迟执行机制；<a id="more"></a>
+</li>
+</ul>
+<!-- toc -->
+<h3 id="view"><a href="#view" class="headerlink" title="view"></a>view</h3><p>View代表一种应用， 返回被请求的页面。 View要实现两个功能：URL的分发处理，定义View函数。</p>
+<p>环境配置:</p>
+<ul>
+<li>settings.ROOT_URLCONF：定义URL的配置文件位置；</li>
+<li>settings.urlpatterns：定义URL patterns 到View函数的映射关系；</li>
+</ul>
+<p>URLpattern 匹配的范围：</p>
+<ul>
+<li>不包含domain</li>
+<li>不包含GET, POST参数</li>
+<li>匹配后的参数作为字符串传入view function</li>
+</ul>
+<p>从匹配结果到函数参数</p>
+<ul>
+<li>传送给View函数的第一个参数是HttpRequest对象，正则表达式匹配的内容作为第二个参数传入。</li>
+<li>可以使用Named groups，将匹配的部分作为keyword参数。</li>
+<li>格式：<code>(?P&lt;name&gt;pattern)</code></li>
+</ul>
+<p>避免重复定义的机制</p>
+<ul>
+<li>view prefix：提取view function的公共前缀</li>
+<li>Including other URLconf</li>
+</ul>
+<p>View函数<br>接收Web请求，返回Web响应，基本的处理流程是:</p>
+<ul>
+<li>收到传入的HttpRequest参数；</li>
+<li>从HttpRequest中获得输入数据；</li>
+<li>进行数据处理，构造Context数据；</li>
+<li>加载Template；</li>
+<li>使用Context数据Render Template；</li>
+<li>返回 HttpResponse；</li>
+</ul>
+<p>相关的类</p>
+<ul>
+<li>class HttpRequest：通过POST或GET属性访问传入的参数</li>
+<li>class HttpResponse：主要派生类有 class HttpResponseRedirect，class HttpResponseNotFound</li>
+<li>class UploadedFile</li>
+<li>class QueryDict：multiple values for the same key</li>
+</ul>
+<p>快捷函数</p>
+<ul>
+<li>render</li>
+<li>render_to_response</li>
+<li>redirect</li>
+<li>get_object_or_404</li>
+<li>get_list_or_404<!-- more -->
+</li>
+</ul>
+<!-- toc -->
+<h3 id="template"><a href="#template" class="headerlink" title="template"></a>template</h3><p>Template用于描述数据的表现，不包含业务逻辑处理。Django不是简单的将Python语言嵌入到HTML代码中，而是定义了一套标记，用于实现对HTML中数据的控制。通过变量访问数据，通过TAG控制Template的处理逻辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">变量</span><br><span class="line">格式：&#123;&#123; variable &#125;&#125;</span><br><span class="line"></span><br><span class="line">TAG:</span><br><span class="line">格式： &#123;% tag %&#125;</span><br><span class="line">常用的有：for/if/block and extends</span><br><span class="line"></span><br><span class="line">过滤器功能:</span><br><span class="line">格式：&#123;&#123; name|lower &#125;&#125;</span><br><span class="line">例：&#123;&#123; value|default:&quot;nothing&quot; &#125;&#125;</span><br><span class="line">常用内置的过滤器：default, length, striptags</span><br><span class="line"></span><br><span class="line">Template继承</span><br><span class="line">使用block/extend实现。</span><br><span class="line">在父模板中，使用block定义扩展点。</span><br><span class="line">在派生模板中，使用extend对扩展点进行重新定义。也可以引用父模板中的定义，使用&#123;&#123; block.super &#125;&#125; 。</span><br></pre></td></tr></table></figure>
+<!-- more -->
+<p><a href="http://www.cnblogs.com/weichsel/archive/2012/10/16/2725554.html" target="_blank" rel="noopener">原文链接</a></p>
+
       
     </div>
     
     
     
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechatpay.png" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>请忽略辣条投递区哈哈哈</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+            <a href="/tags/后端开发/" rel="tag"># 后端开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/26/实现用户注册功能/" rel="next" title="'实现用户注册登录和找回密码的功能'">
+                <i class="fa fa-chevron-left"></i> '实现用户注册登录和找回密码的功能'
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -388,8 +665,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -470,6 +756,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#model"><span class="nav-number">1.</span> <span class="nav-text">model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#view"><span class="nav-number">2.</span> <span class="nav-text">view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#template"><span class="nav-number">3.</span> <span class="nav-text">template</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -6,10 +6,104 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-02-26T04:15:19.079Z</updated>
+  <updated>2018-02-26T10:30:51.767Z</updated>
   <id>http://yoursite.com/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django的MTV结构</title>
+    <link href="http://yoursite.com/2018/02/26/Django%E7%9A%84MTV%E7%BB%93%E6%9E%84/"/>
+    <id>http://yoursite.com/2018/02/26/Django的MTV结构/</id>
+    <published>2018-02-26T05:16:10.000Z</published>
+    <updated>2018-02-26T10:30:51.767Z</updated>
+    
+    <content type="html"><![CDATA[<p>MTV结构就是指Django的model、template、view</p><ul><li>model是定义数据的存储格式，并且提供了数据库访问的API。</li><li>template是定义了数据如何被显示</li><li>view是定义哪儿些数据被显示，是业务逻辑的处理模块<br>在Django项目中包含配置、和每个app被设计用于不同的功能。在设计app时要保证每个app的独立性。</li></ul><p>在收到http请求的时候，依次完成下列处理：</p><ul><li>根据URL通过URLConf模块映射到View函数，将HttpRequest对象作为参数传入。</li><li>在View函数中，获取HTTP请求的参数，通过Model访问数据库，进行业务逻辑运算得到输出数据。</li><li>然后，加载Template，根据输出数据生成页面，将HttpResponse对象返回。</li></ul><!-- toc --><h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><p>一个类对应于数据库中的表（Table），类属性对应于表的字段（Field）。<br>从 django.db.models.Model 派生，支持继承。<br>要使用一个APP时，需要将该APP的Model添加到工程的 settings.py INSTALLED_APPS 中。</p><p>Field的定义:</p><ul><li>字段的类型：指定数据库表字段的类型，表单默认的Widget，以及校验条件。</li><li>字段选项：null, blank, choices, default, unique, primary_key。</li><li>表之间的关系：one-to-one, many-to-many, many-to-one。</li></ul><p>Model中可以定义Method，实现下列功能：</p><ul><li>添加定制的 “row-level” 功能； <a href="https://www.cnblogs.com/ljhdo/p/5040234.html" target="_blank" rel="noopener">行级安全</a></li><li>override predefined methods；</li><li>定义Model的Business Logic；</li><li>定义Raw SQL; <a href="http://onlinehelp.tableau.com/current/pro/desktop/zh-cn/functions_functions_passthrough.html" target="_blank" rel="noopener">直通函数</a></li></ul><p>数据库表查询<br>使用QuerySet对象实现多种方式的查询，Model的objects属性返回QuerySet对象。<br>1、基本查询</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">all_entries = Entry.objects.all()</span><br><span class="line">part_entries = Entry.objects.all()[:5]</span><br><span class="line">one_entry = Entry.objects.get(pk=1)</span><br></pre></td></tr></table></figure><p>2、使用过滤器查询</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Entry.objects.filter(pub_date__year=2006)</span><br><span class="line">Entry.objects.exclude(pub_date__gte=datetime.now())</span><br></pre></td></tr></table></figure><p>3、字段（Field）查询<br>该功能等价于SQL中的WHERE，可以对Field指定更细致的查询条件。<br>通过Keyword参数，传递给QuerySet对象的get, filter, exclude方法。格式：field__lookuptype=value 。<br>常用的lookuptype有：</p><ul><li>exact<br>例如：Entry.objects.get(headline__exact=”Man bites dog”)</li><li>iexact</li><li>contains<br>例如：Entry.objects.get(headline__contains=’Lennon’)</li><li>startswith, endswith</li></ul><p>QuerySet的特点：</p><ul><li>多个过滤器可以组成链使用；</li><li>每次查询返回的QuerySet对象是独立保存；</li><li>使用了缓存机制；</li><li>使用了延迟执行机制；<a id="more"></a></li></ul><!-- toc --><h3 id="view"><a href="#view" class="headerlink" title="view"></a>view</h3><p>View代表一种应用， 返回被请求的页面。 View要实现两个功能：URL的分发处理，定义View函数。</p><p>环境配置:</p><ul><li>settings.ROOT_URLCONF：定义URL的配置文件位置；</li><li>settings.urlpatterns：定义URL patterns 到View函数的映射关系；</li></ul><p>URLpattern 匹配的范围：</p><ul><li>不包含domain</li><li>不包含GET, POST参数</li><li>匹配后的参数作为字符串传入view function</li></ul><p>从匹配结果到函数参数</p><ul><li>传送给View函数的第一个参数是HttpRequest对象，正则表达式匹配的内容作为第二个参数传入。</li><li>可以使用Named groups，将匹配的部分作为keyword参数。</li><li>格式：<code>(?P&lt;name&gt;pattern)</code></li></ul><p>避免重复定义的机制</p><ul><li>view prefix：提取view function的公共前缀</li><li>Including other URLconf</li></ul><p>View函数<br>接收Web请求，返回Web响应，基本的处理流程是:</p><ul><li>收到传入的HttpRequest参数；</li><li>从HttpRequest中获得输入数据；</li><li>进行数据处理，构造Context数据；</li><li>加载Template；</li><li>使用Context数据Render Template；</li><li>返回 HttpResponse；</li></ul><p>相关的类</p><ul><li>class HttpRequest：通过POST或GET属性访问传入的参数</li><li>class HttpResponse：主要派生类有 class HttpResponseRedirect，class HttpResponseNotFound</li><li>class UploadedFile</li><li>class QueryDict：multiple values for the same key</li></ul><p>快捷函数</p><ul><li>render</li><li>render_to_response</li><li>redirect</li><li>get_object_or_404</li><li>get_list_or_404<!-- more --></li></ul><!-- toc --><h3 id="template"><a href="#template" class="headerlink" title="template"></a>template</h3><p>Template用于描述数据的表现，不包含业务逻辑处理。Django不是简单的将Python语言嵌入到HTML代码中，而是定义了一套标记，用于实现对HTML中数据的控制。通过变量访问数据，通过TAG控制Template的处理逻辑。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">变量</span><br><span class="line">格式：&#123;&#123; variable &#125;&#125;</span><br><span class="line"></span><br><span class="line">TAG:</span><br><span class="line">格式： &#123;% tag %&#125;</span><br><span class="line">常用的有：for/if/block and extends</span><br><span class="line"></span><br><span class="line">过滤器功能:</span><br><span class="line">格式：&#123;&#123; name|lower &#125;&#125;</span><br><span class="line">例：&#123;&#123; value|default:&quot;nothing&quot; &#125;&#125;</span><br><span class="line">常用内置的过滤器：default, length, striptags</span><br><span class="line"></span><br><span class="line">Template继承</span><br><span class="line">使用block/extend实现。</span><br><span class="line">在父模板中，使用block定义扩展点。</span><br><span class="line">在派生模板中，使用extend对扩展点进行重新定义。也可以引用父模板中的定义，使用&#123;&#123; block.super &#125;&#125; 。</span><br></pre></td></tr></table></figure><!-- more --><p><a href="http://www.cnblogs.com/weichsel/archive/2012/10/16/2725554.html" target="_blank" rel="noopener">原文链接</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;MTV结构就是指Django的model、template、view&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;model是定义数据的存储格式，并且提供了数据库访问的API。&lt;/li&gt;
+&lt;li&gt;template是定义了数据如何被显示&lt;/li&gt;
+&lt;li&gt;view是定义哪儿些数据被显示，是业务逻辑的处理模块&lt;br&gt;在Django项目中包含配置、和每个app被设计用于不同的功能。在设计app时要保证每个app的独立性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在收到http请求的时候，依次完成下列处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根据URL通过URLConf模块映射到View函数，将HttpRequest对象作为参数传入。&lt;/li&gt;
+&lt;li&gt;在View函数中，获取HTTP请求的参数，通过Model访问数据库，进行业务逻辑运算得到输出数据。&lt;/li&gt;
+&lt;li&gt;然后，加载Template，根据输出数据生成页面，将HttpResponse对象返回。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- toc --&gt;
+&lt;h3 id=&quot;model&quot;&gt;&lt;a href=&quot;#model&quot; class=&quot;headerlink&quot; title=&quot;model&quot;&gt;&lt;/a&gt;model&lt;/h3&gt;&lt;p&gt;一个类对应于数据库中的表（Table），类属性对应于表的字段（Field）。&lt;br&gt;从 django.db.models.Model 派生，支持继承。&lt;br&gt;要使用一个APP时，需要将该APP的Model添加到工程的 settings.py INSTALLED_APPS 中。&lt;/p&gt;
+&lt;p&gt;Field的定义:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字段的类型：指定数据库表字段的类型，表单默认的Widget，以及校验条件。&lt;/li&gt;
+&lt;li&gt;字段选项：null, blank, choices, default, unique, primary_key。&lt;/li&gt;
+&lt;li&gt;表之间的关系：one-to-one, many-to-many, many-to-one。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Model中可以定义Method，实现下列功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加定制的 “row-level” 功能； &lt;a href=&quot;https://www.cnblogs.com/ljhdo/p/5040234.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;行级安全&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;override predefined methods；&lt;/li&gt;
+&lt;li&gt;定义Model的Business Logic；&lt;/li&gt;
+&lt;li&gt;定义Raw SQL; &lt;a href=&quot;http://onlinehelp.tableau.com/current/pro/desktop/zh-cn/functions_functions_passthrough.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;直通函数&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;数据库表查询&lt;br&gt;使用QuerySet对象实现多种方式的查询，Model的objects属性返回QuerySet对象。&lt;br&gt;1、基本查询&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;all_entries = Entry.objects.all()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;part_entries = Entry.objects.all()[:5]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;one_entry = Entry.objects.get(pk=1)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;2、使用过滤器查询&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Entry.objects.filter(pub_date__year=2006)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Entry.objects.exclude(pub_date__gte=datetime.now())&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;3、字段（Field）查询&lt;br&gt;该功能等价于SQL中的WHERE，可以对Field指定更细致的查询条件。&lt;br&gt;通过Keyword参数，传递给QuerySet对象的get, filter, exclude方法。格式：field__lookuptype=value 。&lt;br&gt;常用的lookuptype有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;exact&lt;br&gt;例如：Entry.objects.get(headline__exact=”Man bites dog”)&lt;/li&gt;
+&lt;li&gt;iexact&lt;/li&gt;
+&lt;li&gt;contains&lt;br&gt;例如：Entry.objects.get(headline__contains=’Lennon’)&lt;/li&gt;
+&lt;li&gt;startswith, endswith&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;QuerySet的特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多个过滤器可以组成链使用；&lt;/li&gt;
+&lt;li&gt;每次查询返回的QuerySet对象是独立保存；&lt;/li&gt;
+&lt;li&gt;使用了缓存机制；&lt;/li&gt;
+&lt;li&gt;使用了延迟执行机制；
+    
+    </summary>
+    
+      <category term="Django" scheme="http://yoursite.com/categories/Django/"/>
+    
+    
+      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+    
+      <category term="后端开发" scheme="http://yoursite.com/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&#39;实现用户注册登录和找回密码的功能&#39;</title>
+    <link href="http://yoursite.com/2018/02/26/%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E5%8A%9F%E8%83%BD/"/>
+    <id>http://yoursite.com/2018/02/26/实现用户注册功能/</id>
+    <published>2018-02-26T04:49:49.000Z</published>
+    <updated>2018-02-26T05:03:03.117Z</updated>
+    
+    <content type="html"><![CDATA[<!-- toc --><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。<br><a id="more"></a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- toc --&gt;
+&lt;h3 id=&quot;登录&quot;&gt;&lt;a href=&quot;#登录&quot; class=&quot;headerlink&quot; title=&quot;登录&quot;&gt;&lt;/a&gt;登录&lt;/h3&gt;&lt;p&gt;将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Django" scheme="http://yoursite.com/categories/Django/"/>
+    
+      <category term="在线教育平台" scheme="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
+    
+    
+      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+    
+      <category term="后端开发" scheme="http://yoursite.com/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Xadmin后台管理系统</title>

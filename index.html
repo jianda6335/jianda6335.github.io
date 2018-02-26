@@ -334,6 +334,415 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/Django的MTV结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Minehotpepper' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/26/Django的MTV结构/" itemprop="url">Django的MTV结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T13:16:10+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,040
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>MTV结构就是指Django的model、template、view</p>
+<ul>
+<li>model是定义数据的存储格式，并且提供了数据库访问的API。</li>
+<li>template是定义了数据如何被显示</li>
+<li>view是定义哪儿些数据被显示，是业务逻辑的处理模块<br>在Django项目中包含配置、和每个app被设计用于不同的功能。在设计app时要保证每个app的独立性。</li>
+</ul>
+<p>在收到http请求的时候，依次完成下列处理：</p>
+<ul>
+<li>根据URL通过URLConf模块映射到View函数，将HttpRequest对象作为参数传入。</li>
+<li>在View函数中，获取HTTP请求的参数，通过Model访问数据库，进行业务逻辑运算得到输出数据。</li>
+<li>然后，加载Template，根据输出数据生成页面，将HttpResponse对象返回。</li>
+</ul>
+<!-- toc -->
+<h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><p>一个类对应于数据库中的表（Table），类属性对应于表的字段（Field）。<br>从 django.db.models.Model 派生，支持继承。<br>要使用一个APP时，需要将该APP的Model添加到工程的 settings.py INSTALLED_APPS 中。</p>
+<p>Field的定义:</p>
+<ul>
+<li>字段的类型：指定数据库表字段的类型，表单默认的Widget，以及校验条件。</li>
+<li>字段选项：null, blank, choices, default, unique, primary_key。</li>
+<li>表之间的关系：one-to-one, many-to-many, many-to-one。</li>
+</ul>
+<p>Model中可以定义Method，实现下列功能：</p>
+<ul>
+<li>添加定制的 “row-level” 功能； <a href="https://www.cnblogs.com/ljhdo/p/5040234.html" target="_blank" rel="noopener">行级安全</a></li>
+<li>override predefined methods；</li>
+<li>定义Model的Business Logic；</li>
+<li>定义Raw SQL; <a href="http://onlinehelp.tableau.com/current/pro/desktop/zh-cn/functions_functions_passthrough.html" target="_blank" rel="noopener">直通函数</a></li>
+</ul>
+<p>数据库表查询<br>使用QuerySet对象实现多种方式的查询，Model的objects属性返回QuerySet对象。<br>1、基本查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">all_entries = Entry.objects.all()</span><br><span class="line">part_entries = Entry.objects.all()[:5]</span><br><span class="line">one_entry = Entry.objects.get(pk=1)</span><br></pre></td></tr></table></figure>
+<p>2、使用过滤器查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Entry.objects.filter(pub_date__year=2006)</span><br><span class="line">Entry.objects.exclude(pub_date__gte=datetime.now())</span><br></pre></td></tr></table></figure>
+<p>3、字段（Field）查询<br>该功能等价于SQL中的WHERE，可以对Field指定更细致的查询条件。<br>通过Keyword参数，传递给QuerySet对象的get, filter, exclude方法。格式：field__lookuptype=value 。<br>常用的lookuptype有：</p>
+<ul>
+<li>exact<br>例如：Entry.objects.get(headline__exact=”Man bites dog”)</li>
+<li>iexact</li>
+<li>contains<br>例如：Entry.objects.get(headline__contains=’Lennon’)</li>
+<li>startswith, endswith</li>
+</ul>
+<p>QuerySet的特点：</p>
+<ul>
+<li>多个过滤器可以组成链使用；</li>
+<li>每次查询返回的QuerySet对象是独立保存；</li>
+<li>使用了缓存机制；</li>
+<li>使用了延迟执行机制；
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/26/Django的MTV结构/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/实现用户注册功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Minehotpepper' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/26/实现用户注册功能/" itemprop="url">'实现用户注册登录和找回密码的功能'</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T12:49:49+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Django/在线教育平台/" itemprop="url" rel="index">
+                    <span itemprop="name">在线教育平台</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  25
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- toc -->
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/26/实现用户注册功能/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/24/Xadmin后台管理系统/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1778,399 +2187,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/url和templates配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Minehotpepper' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/url和templates配置/" itemprop="url">url和templates配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T16:34:33+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/在线教育平台/" itemprop="url" rel="index">
-                    <span itemprop="name">在线教育平台</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  302
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="将数据库中的值显示到html中"><a href="#将数据库中的值显示到html中" class="headerlink" title="将数据库中的值显示到html中"></a>将数据库中的值显示到html中</h4><p>在views.py 中的render中是可以带参数的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from .models import UserMessage</span><br><span class="line">def getfrom(request):</span><br><span class="line">    message = UserMessage.objects.filter(name=&quot;yourname&quot;)</span><br><span class="line">    return render(request, &quot;message_form.html&quot;,&#123;&quot;my_message&quot;:message&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>在HTML的template模板中不能写入过多的Python逻辑便于后期的维护 添加<code>value</code>即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;</span><br><span class="line">    &lt;span&gt;联系地址 :&lt;/span&gt;</span><br><span class="line">    &lt;input id=&quot;adress&quot; type=&quot;text&quot; value=&quot;&#123;&#123; my_message.address &#125;&#125;&quot; etc./&gt;</span><br><span class="line">    &lt;div class=&quot;error-msg&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/label&gt;</span><br></pre></td></tr></table></figure></p>
-<p>更多的template内置函数在<a href="https://docs.djangoproject.com/en/2.0/ref/forms/fields/" target="_blank" rel="noopener"><font color="#0099ff">传送门</font></a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/url和templates配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/09/models的增删改查/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Minehotpepper' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/09/models的增删改查/" itemprop="url">models的增删改查</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T19:36:54+08:00">
-                2018-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/在线教育平台/" itemprop="url" rel="index">
-                    <span itemprop="name">在线教育平台</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  891
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h2 id="views知识点"><a href="#views知识点" class="headerlink" title="views知识点"></a>views知识点</h2><!-- toc -->
-<h4 id="HttpRequest-和HttpResponse"><a href="#HttpRequest-和HttpResponse" class="headerlink" title="HttpRequest 和HttpResponse"></a>HttpRequest 和HttpResponse</h4><p>HTTP请求：HttpRequest<br>HTTP响应：HttpResponse<br>在django.http中。<br>其中：<br><strong>GET</strong><br>在views.py中调用request.GET.get(“参数名”)来接收传进来的参数。<br>在浏览器中用\?来传递参数<br><strong>POST</strong></p>
-<ul>
-<li>表单post提交，使用POST接收。注意，表单中的变量名要和views.py中get方法的变量名一样。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#form 表单</span><br><span class="line">&lt;form method=&quot;post&quot;  action=&quot;/hello/&quot;&gt;</span><br><span class="line">&lt;% csrf_token %&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; value=&quot;&quot; name=&quot;name&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#views.py</span><br><span class="line">request.POST.get(&quot;name&quot;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用get提交,GET接收<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#form 表单</span><br><span class="line">&lt;form method=&quot;get&quot;  action=&quot;/hello/&quot;&gt;</span><br><span class="line">&lt;% csrf_token %&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; value=&quot;&quot; name=&quot;name&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#views.py</span><br><span class="line">request.GET.get(&quot;name&quot;)</span><br></pre></td></tr></table></figure>
-<p><strong>HttpRequest对象的属性和方法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"># path：       请求页面的全路径，不包括域名</span><br><span class="line">#</span><br><span class="line"># method：     请求中使用的HTTP方法的字符串表示。全大写表示。例如</span><br><span class="line">#</span><br><span class="line">#                    if  req.method==&quot;GET&quot;:</span><br><span class="line">#</span><br><span class="line">#                              do_something()</span><br><span class="line">#</span><br><span class="line">#                    elseif req.method==&quot;POST&quot;:</span><br><span class="line">#</span><br><span class="line">#                              do_something_else()</span><br><span class="line">#</span><br><span class="line"># GET:         包含所有HTTP GET参数的类字典对象</span><br><span class="line">#</span><br><span class="line"># POST：       包含所有HTTP POST参数的类字典对象</span><br><span class="line">#</span><br><span class="line">#              服务器收到空的POST请求的情况也是可能发生的，也就是说，表单form通过</span><br><span class="line">#              HTTP POST方法提交请求，但是表单中可能没有数据，因此不能使用</span><br><span class="line">#              if req.POST来判断是否使用了HTTP POST 方法；应该使用  if req.method==&quot;POST&quot;</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"># COOKIES:     包含所有cookies的标准Python字典对象；keys和values都是字符串。</span><br><span class="line">#</span><br><span class="line"># FILES：      包含所有上传文件的类字典对象；FILES中的每一个Key都是&lt;input type=&quot;file&quot; name=&quot;&quot; /&gt;标签中                     name属性的值，FILES中的每一个value同时也是一个标准的python字典对象，包含下面三个Keys：</span><br><span class="line">#</span><br><span class="line">#             filename：      上传文件名，用字符串表示</span><br><span class="line">#             content_type:   上传文件的Content Type</span><br><span class="line">#             content：       上传文件的原始内容</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"># user：       是一个django.contrib.auth.models.User对象，代表当前登陆的用户。如果访问用户当前</span><br><span class="line">#              没有登陆，user将被初始化为django.contrib.auth.models.AnonymousUser的实例。你</span><br><span class="line">#              可以通过user的is_authenticated()方法来辨别用户是否登陆：</span><br><span class="line">#              if req.user.is_authenticated();只有激活Django中的AuthenticationMiddleware</span><br><span class="line">#              时该属性才可用</span><br><span class="line">#</span><br><span class="line"># session：    唯一可读写的属性，代表当前会话的字典对象；自己有激活Django中的session支持时该属性才可用。</span><br><span class="line"></span><br><span class="line">#方法</span><br><span class="line">get_full_path(),   比如：http://127.0.0.1:8000/index33/?name=123 ,req.get_full_path()得到的结果就是/index33/?name=123</span><br><span class="line">req.path:/index33</span><br><span class="line">#注意一个常用方法：request.POST.getlist(&apos;&apos;)</span><br></pre></td></tr></table></figure></p>
-<p><strong>HTTPResponse对象</strong><br>对于HttpRequest对象来说，是由django自动创建的，但是，HttpResponse对象就必须我们自己创建。每个view请求处理方法必须返回一个HttpResponse对象。<br>HttpResponse类在django.http.HttpResponse<br>在HttpResponse对象上扩展的常用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">页面渲染：         render()（推荐）&lt;br&gt;                 render_to_response(),</span><br><span class="line"></span><br><span class="line">页面跳转：         redirect(&quot;路径&quot;)</span><br><span class="line"></span><br><span class="line">locals()：    可以直接将函数中所有的变量传给模板</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/09/models的增删改查/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2225,7 +2241,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

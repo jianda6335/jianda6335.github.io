@@ -3,6 +3,53 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/02/26/Django%E7%9A%84MTV%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2018-02-26T10:30:51.767Z</lastmod>
+    <data>
+        <display>
+        <title>Django的MTV结构</title>
+        <pubTime>2018-02-26T05:16:10.000Z</pubTime>
+        
+        <tag>Django </tag>
+         
+        <tag>后端开发 </tag>
+         
+         
+           
+             
+              <breadCrumb title="Django" url="http://yoursite.com/categories/Django/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/02/26/%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E5%8A%9F%E8%83%BD/</loc>
+    <lastmod>2018-02-26T05:03:03.117Z</lastmod>
+    <data>
+        <display>
+        <title>'实现用户注册登录和找回密码的功能'</title>
+        <pubTime>2018-02-26T04:49:49.000Z</pubTime>
+        
+        <tag>Django </tag>
+         
+        <tag>后端开发 </tag>
+         
+         
+           
+             
+              <breadCrumb title="Django" url="http://yoursite.com/categories/Django/"/>
+          
+             
+              <breadCrumb title="在线教育平台" url="http://yoursite.com/categories/Django/%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/02/24/Xadmin%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2018-02-26T04:15:19.079Z</lastmod>
     <data>

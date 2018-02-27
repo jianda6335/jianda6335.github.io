@@ -107,18 +107,20 @@
 
 
 
-<meta name="description" content="登录将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。">
+<meta name="description" content="登录1、配置首页将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。利用TemplateView的as_view()方法将静态文件转为view。1234567891011121314#第一步说明静态文件是放在哪儿个目录之下的#settings.pyimport osSTATIC_URL = &amp;apos;/static/&amp;apos;STATIC">
 <meta name="keywords" content="Django,后端开发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="&#39;实现用户注册登录和找回密码的功能&#39;">
+<meta property="og:title" content="实现用户注册登录和找回密码的功能">
 <meta property="og:url" content="http://yoursite.com/2018/02/26/实现用户注册功能/index.html">
 <meta property="og:site_name" content="Minehotpepper&#39; Blog">
-<meta property="og:description" content="登录将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。">
+<meta property="og:description" content="登录1、配置首页将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。利用TemplateView的as_view()方法将静态文件转为view。1234567891011121314#第一步说明静态文件是放在哪儿个目录之下的#settings.pyimport osSTATIC_URL = &amp;apos;/static/&amp;apos;STATIC">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-26T05:03:03.117Z">
+<meta property="og:image" content="http://p3b8zhvsm.bkt.clouddn.com/static%20path.png">
+<meta property="og:updated_time" content="2018-02-26T14:39:28.683Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="&#39;实现用户注册登录和找回密码的功能&#39;">
-<meta name="twitter:description" content="登录将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。">
+<meta name="twitter:title" content="实现用户注册登录和找回密码的功能">
+<meta name="twitter:description" content="登录1、配置首页将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。利用TemplateView的as_view()方法将静态文件转为view。1234567891011121314#第一步说明静态文件是放在哪儿个目录之下的#settings.pyimport osSTATIC_URL = &amp;apos;/static/&amp;apos;STATIC">
+<meta name="twitter:image" content="http://p3b8zhvsm.bkt.clouddn.com/static%20path.png">
 
 
 
@@ -154,7 +156,7 @@
 
 
 
-  <title>'实现用户注册登录和找回密码的功能' | Minehotpepper' Blog</title>
+  <title>实现用户注册登录和找回密码的功能 | Minehotpepper' Blog</title>
   
 
 
@@ -352,7 +354,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">'实现用户注册登录和找回密码的功能'</h1>
+          <h1 class="post-title" itemprop="name headline">实现用户注册登录和找回密码的功能</h1>
         
 
         <div class="post-meta">
@@ -434,7 +436,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  25
+                  1,042
                 </span>
               
 
@@ -450,7 +452,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -472,8 +474,23 @@
 
       
         <!-- toc -->
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。<br><a id="more"></a></p>
-
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>1、配置首页<br>将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。<br>利用TemplateView的as_view()方法将静态文件转为view。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#第一步说明静态文件是放在哪儿个目录之下的</span><br><span class="line">#settings.py</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">STATIC_URL = &apos;/static/&apos;</span><br><span class="line">STATICFILES_DIRS = (</span><br><span class="line">    os.path.join(BASE_DIR, &apos;static&apos;)</span><br><span class="line">)</span><br><span class="line">#第二步配置首页的URL</span><br><span class="line">#urls.py</span><br><span class="line">from django.views.generic import TemplateView</span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&apos;^$&apos;, TemplateView.as_view(template_name=&apos;index.html&apos;), name=&apos;index&apos;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>完成上面的工作之后还需要将如图所示index.html当中的静态文件的路径修改 （包括css、js、image都需要修改）<br><img src="http://p3b8zhvsm.bkt.clouddn.com/static%20path.png" alt="index.html"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">href=&quot;/static/css/reset.css&quot;</span><br><span class="line">src=&quot;/static/js/jquery.min.js&quot;</span><br><span class="line">src=&quot;/static/images/top_down.png&quot;</span><br></pre></td></tr></table></figure>
+<p>2、第二步配置登录页面<br>配置步骤相同，将login.html文件放在templates中，配置URL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url(&apos;^login/$&apos;, TemplateView.as_view(template_name=&apos;login.html&apos;), name=&apos;login&apos;)</span><br><span class="line">注：根目录下所有的路径在匹配URL的时候前面都不需要加&apos;/&apos;</span><br></pre></td></tr></table></figure></p>
+<p>然后就需要实现点击登录按钮跳转到登录页面<br>在index.html文件中找到登录的a标签，将登录地址改为login的URL即可。</p>
+<p>3、用户登录的后台逻辑<br>由于需要写后台逻辑。需要写自己的view</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#users下的views.py</span><br><span class="line">def login(request):</span><br><span class="line">    if request.method == &quot;POST&quot;：</span><br><span class="line">        pass</span><br><span class="line">    elif request.method == &quot;GET:</span><br><span class="line">        return render(request, &quot;login.html&quot;, &#123;&#125;)</span><br><span class="line"></span><br><span class="line">#在urls.py中 将TemplateView改为自己写的view即login  这里是指向而不是调用  所以在login后面不能加（）</span><br><span class="line">url(&apos;^login/$&apos;, login, name=&apos;login&apos;)</span><br></pre></td></tr></table></figure>
+<p>在login.html中有一个form，它会将用户名密码提交到后台中去，将其中的两个参数设置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">action=&quot;/login/&quot; method=&quot;post&quot;</span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<p>再修改form表单中的input的name 这个name会传到后台,最后记得在form表单中添加csrf_token，配置完成之后就可以写具体的逻辑了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#将post来的数据与数据库中的进行验证、</span><br><span class="line"></span><br><span class="line">from django.contrib.auth import authenticate,login</span><br><span class="line">def user_login(request):</span><br><span class="line">    if request.method == &quot;POST&quot;：</span><br><span class="line">        user_name = request.POST.get(&apos;username&apos;, &apos;&apos;)</span><br><span class="line">        pass_word = request.POST.get(&apos;password&apos;, &apos;&apos;)</span><br><span class="line">        user = authenticate(username=user_name, password=pass_word)    #如果验证通过，则user是个对象，否则是None</span><br><span class="line">        if user is not None:</span><br><span class="line">            login(request, user)</span><br><span class="line">            return render(request, &quot;index.html&quot;)</span><br><span class="line">        else:</span><br><span class="line">            return render(request, &quot;login.html&quot;, &#123;&quot;msg&quot;:&quot;用户名或者密码错误！&quot;&#125;)   #将msg变量添加到html中</span><br><span class="line">    elif request.method == &quot;GET:</span><br><span class="line">        return render(request, &quot;login.html&quot;, &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>登录之后，需要在index页面进行判断，看用户是否是登陆状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#index.html</span><br><span class="line">#判断是否登录</span><br><span class="line">&#123;% if request.user.is_authenticated %&#125;</span><br><span class="line">    #已登录逻辑代码</span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">    #未登录逻辑代码</span><br><span class="line">&#123;% endif%&#125;</span><br></pre></td></tr></table></figure></p>
+<p>自定义邮箱或者用户名登录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#views.py</span><br><span class="line">from django.contrib.auth.backends import ModelBackend</span><br><span class="line">from .model import UserProfile</span><br><span class="line">from django.db.models import Q     #实现并集的操作</span><br><span class="line">class CustomBackend(ModelBackend):</span><br><span class="line">    def authenticate(self, username=None, password=None, **kwargs):</span><br><span class="line">        try:</span><br><span class="line">            user = UserProfile.objects.get(Q(username=username)|Q(email=username))</span><br><span class="line">            if user,check_password(password):</span><br><span class="line">                return user</span><br><span class="line">        except Exception as e:</span><br><span class="line">            return None</span><br><span class="line"></span><br><span class="line">#settings</span><br><span class="line">AUTHENTICATION_BACKENDS = (</span><br><span class="line">    &apos;users.views.CustomBackend&apos;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<!-- toc -->
+<h3 id="用form实现登录"><a href="#用form实现登录" class="headerlink" title="用form实现登录"></a>用form实现登录</h3><p>上面是基于函数的方法实现的登录，这里是基于类的方法完成的登录<br>form的作用是将用户提交过来的表单进行一部分的预处理，在users下面新建一个froms文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#froms.py</span><br><span class="line">from django import forms</span><br><span class="line"></span><br><span class="line">class LoginForm(forms.Form):</span><br><span class="line">    username = forms.CharField(required=True)</span><br><span class="line">    password = forms.Charfield(required=True, min_length=5)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#views.py</span><br><span class="line">from django.views.generic.base import View</span><br><span class="line"></span><br><span class="line">class LoginView(View):</span><br><span class="line">    def get(self, request):</span><br><span class="line">        return render(request, &quot;login.html&quot;, &#123;&#125;)</span><br><span class="line"></span><br><span class="line">    def post(self, request):</span><br><span class="line">        login_form = LoginForm(request.POST)   #实例化LoginForm</span><br><span class="line">        if login_from.is_valid():</span><br><span class="line">            user_name = request.POST.get(&apos;username&apos;, &apos;&apos;)</span><br><span class="line">            pass_word = request.POST.get(&apos;password&apos;, &apos;&apos;)</span><br><span class="line">            user = authenticate(username=user_name, password=pass_word)    #如果验证通过，则user是个对象，否则是None</span><br><span class="line">            if user is not None:</span><br><span class="line">                login(request, user)</span><br><span class="line">                return render(request, &quot;index.html&quot;)</span><br><span class="line">            else:</span><br><span class="line">                #将msg变量添加到html中</span><br><span class="line">                return render(request, &quot;login.html&quot;, &#123;&quot;msg&quot;:&quot;用户名或者密码错误！&quot;&#125;)</span><br><span class="line">        else:</span><br><span class="line">            将from中的error显示到login页面</span><br><span class="line">            return render(request, &quot;login.html&quot;, &quot;login_form&quot;:login_form)</span><br><span class="line"></span><br><span class="line">#login.html</span><br><span class="line">在errorput前添加</span><br><span class="line">&#123;% if login_form.errors.username %&#125;errorput&#123;% endif %&#125;  #如果login_form的错误中有username就显示</span><br><span class="line">&#123;% if login_form.errors.password %&#125;errorput&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#urls.py</span><br><span class="line">from users.views import LoginView</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&apos;^login/$&apos;, LoginView.as_view(), name=&quot;login&quot;)  #这里一定要加()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<!-- more -->
       
     </div>
     
@@ -683,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录"><span class="nav-number">1.</span> <span class="nav-text">登录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录"><span class="nav-number">1.</span> <span class="nav-text">登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用form实现登录"><span class="nav-number">2.</span> <span class="nav-text">用form实现登录</span></a></li></ol></div>
             
 
           </div>

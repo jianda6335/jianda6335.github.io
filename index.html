@@ -503,7 +503,7 @@
 <li>使用了延迟执行机制；
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/26/Django的MTV结构/#more" rel="contents">
+            <a class="btn" href="/2018/02/26/Django的MTV结构/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -573,7 +573,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/26/实现用户注册功能/" itemprop="url">'实现用户注册登录和找回密码的功能'</a></h1>
+                <a class="post-title-link" href="/2018/02/26/实现用户注册功能/" itemprop="url">实现用户注册登录和找回密码的功能</a></h1>
         
 
         <div class="post-meta">
@@ -650,7 +650,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  25
+                  1,042
                 </span>
               
 
@@ -666,7 +666,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -689,10 +689,21 @@
       
         
           <!-- toc -->
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。<br>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>1、配置首页<br>将首页的HTML文件放在templates的目录下面，将css、images、js放在static目录下。<br>利用TemplateView的as_view()方法将静态文件转为view。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#第一步说明静态文件是放在哪儿个目录之下的</span><br><span class="line">#settings.py</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">STATIC_URL = &apos;/static/&apos;</span><br><span class="line">STATICFILES_DIRS = (</span><br><span class="line">    os.path.join(BASE_DIR, &apos;static&apos;)</span><br><span class="line">)</span><br><span class="line">#第二步配置首页的URL</span><br><span class="line">#urls.py</span><br><span class="line">from django.views.generic import TemplateView</span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(&apos;^$&apos;, TemplateView.as_view(template_name=&apos;index.html&apos;), name=&apos;index&apos;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>完成上面的工作之后还需要将如图所示index.html当中的静态文件的路径修改 （包括css、js、image都需要修改）<br><img src="http://p3b8zhvsm.bkt.clouddn.com/static%20path.png" alt="index.html"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">href=&quot;/static/css/reset.css&quot;</span><br><span class="line">src=&quot;/static/js/jquery.min.js&quot;</span><br><span class="line">src=&quot;/static/images/top_down.png&quot;</span><br></pre></td></tr></table></figure>
+<p>2、第二步配置登录页面<br>配置步骤相同，将login.html文件放在templates中，配置URL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url(&apos;^login/$&apos;, TemplateView.as_view(template_name=&apos;login.html&apos;), name=&apos;login&apos;)</span><br><span class="line">注：根目录下所有的路径在匹配URL的时候前面都不需要加&apos;/&apos;</span><br></pre></td></tr></table></figure></p>
+<p>然后就需要实现点击登录按钮跳转到登录页面<br>在index.html文件中找到登录的a标签，将登录地址改为login的URL即可。</p>
+<p>3、用户登录的后台逻辑<br>由于需要写后台逻辑。需要写自己的view</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#users下的views.py</span><br><span class="line">def login(request):</span><br><span class="line">    if request.method == &quot;POST&quot;：</span><br><span class="line">        pass</span><br><span class="line">    elif request.method == &quot;GET:</span><br><span class="line">        return render(request, &quot;login.html&quot;, &#123;&#125;)</span><br><span class="line"></span><br><span class="line">#在urls.py中 将TemplateView改为自己写的view即login  这里是指向而不是调用  所以在login后面不能加（）</span><br><span class="line">url(&apos;^login/$&apos;, login, name=&apos;login&apos;)</span><br></pre></td></tr></table></figure>
+<p>在login.html中有一个form，它会将用户名密码提交到后台中去，将其中的两个参数设置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">action=&quot;/login/&quot; method=&quot;post&quot;</span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<p>再修改form表单中的input的name 这个name会传到后台,最后记得在form表单中添加csrf_token，配置完成之后就可以写具体的逻辑了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#将post来的数据与数据库中的进行验证、</span><br><span class="line"></span><br><span class="line">from django.contrib.auth import authenticate,login</span><br><span class="line">def user_login(request):</span><br><span class="line">    if request.method == &quot;POST&quot;：</span><br><span class="line">        user_name = request.POST.get(&apos;username&apos;, &apos;&apos;)</span><br><span class="line">        pass_word = request.POST.get(&apos;password&apos;, &apos;&apos;)</span><br><span class="line">        user = authenticate(username=user_name, password=pass_word)    #如果验证通过，则user是个对象，否则是None</span><br><span class="line">        if user is not None:</span><br><span class="line">            login(request, user)</span><br><span class="line">            return render(request, &quot;index.html&quot;)</span><br><span class="line">        else:</span><br><span class="line">            return render(request, &quot;login.html&quot;, &#123;&quot;msg&quot;:&quot;用户名或者密码错误！&quot;&#125;)   #将msg变量添加到html中</span><br><span class="line">    elif request.method == &quot;GET:</span><br><span class="line">        return render(request, &quot;login.html&quot;, &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>登录之后，需要在index页面进行判断，看用户是否是登陆状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#index.html</span><br><span class="line">#判断是否登录</span><br><span class="line">&#123;% if request.user.is_authenticated %&#125;</span><br><span class="line">    #已登录逻辑代码</span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">    #未登录逻辑代码</span><br><span class="line">&#123;% endif%&#125;</span><br></pre></td></tr></table></figure></p>
+<p>自定义邮箱或者用户名登录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#views.py</span><br><span class="line">from django.contrib.auth.backends import ModelBackend</span><br><span class="line">from .model import UserProfile</span><br><span class="line">from django.db.models import Q     #实现并集的操作</span><br><span class="line">class CustomBackend(ModelBackend):</span><br><span class="line">    def authenticate(self, username=None, password=None, **kwargs):</span><br><span class="line">        try:</span><br><span class="line">            user = UserProfile.objects.get(Q(username=username)|Q(email=username))</span><br><span class="line">            if user,check_password(password):</span><br><span class="line">                return user</span><br><span class="line">        except Exception as e:</span><br><span class="line">            return None</span><br><span class="line"></span><br><span class="line">#settings</span><br><span class="line">AUTHENTICATION_BACKENDS = (</span><br><span class="line">    &apos;users.views.CustomBackend&apos;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/26/实现用户注册功能/#more" rel="contents">
+            <a class="btn" href="/2018/02/26/实现用户注册功能/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -884,7 +895,7 @@
 <li>快速开发
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/24/Xadmin后台管理系统/#more" rel="contents">
+            <a class="btn" href="/2018/02/24/Xadmin后台管理系统/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1064,7 +1075,7 @@
 <p>字符类型：<br><img src="http://p3b8zhvsm.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E7%B1%BB%E5%9E%8B.png" alt="字符类型"><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/12/数据类型和操作数据表/#more" rel="contents">
+            <a class="btn" href="/2018/02/12/数据类型和操作数据表/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1242,7 +1253,7 @@
 <h4 id="启动和停止MySQL"><a href="#启动和停止MySQL" class="headerlink" title="启动和停止MySQL"></a>启动和停止MySQL</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#启动MySQL</span><br><span class="line">net start mysql</span><br><span class="line">#停止MySQL</span><br><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/11/MySQL初涉/#more" rel="contents">
+            <a class="btn" href="/2018/02/11/MySQL初涉/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1421,7 +1432,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form   method=&quot;传送方式&quot;   action=&quot;服务器文件&quot;&gt;</span><br><span class="line">#form:表单成对出现 &lt;form&gt;开始，&lt;/form&gt;结束</span><br><span class="line">#action:浏览者输入的数据被传送到的地方。</span><br><span class="line">#method:数据传送的方式。（get/post）</span><br><span class="line">注意：所有表单控件（文本框、文本域、按钮、单选框、复选框等）都必须放在 &lt;form&gt;&lt;/form&gt; 标签之间（否则用户输入的信息可提交不到服务器上）。</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/11/与用户交互的表单标签/#more" rel="contents">
+            <a class="btn" href="/2018/02/11/与用户交互的表单标签/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1605,7 +1616,7 @@
 <p>点击链接会打开电子邮件应用，并自动填写收件人等设置好的信息。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/11/标签-第三部分/#more" rel="contents">
+            <a class="btn" href="/2018/02/11/标签-第三部分/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1784,7 +1795,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;信息&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;信息&lt;/li&gt;</span><br><span class="line">   ......</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/11/标签-第二部分/#more" rel="contents">
+            <a class="btn" href="/2018/02/11/标签-第二部分/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1962,7 +1973,7 @@
 <h4 id="body标签"><a href="#body标签" class="headerlink" title="body标签"></a>body标签</h4><p>在网页上要展示出来的页面内容一定要放在body标签中。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/标签(第一部分)/#more" rel="contents">
+            <a class="btn" href="/2018/02/10/标签(第一部分)/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2149,7 +2160,7 @@
 <p>font-size是修改字号，color是修改字体颜色，text-align是调整字体位置，center居中，left最左，right最右<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/html介绍/#more" rel="contents">
+            <a class="btn" href="/2018/02/10/html介绍/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
